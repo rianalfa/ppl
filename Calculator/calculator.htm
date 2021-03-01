@@ -1,703 +1,673 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META name="viewport" content="width=800, initial-scale=1, maximum-scale=2"> 
-<title>Calculator</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<META name="viewport" content="width=800, initial-scale=1, maximum-scale=2"> 
+		<title>Calculator</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+		<link rel="stylesheet" href="bootstrap.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 
-<!-- This script and many more are available free online at -->
+		<!-- This script and many more are available free online at -->
 
-<!-- The JavaScript Source!! http://javascript.internet.com -->
+		<!-- The JavaScript Source!! http://javascript.internet.com -->
 
-<!-- Original:  Denis Makarov (info@binarythings.com) -->
+		<!-- Original:  Denis Makarov (info@binarythings.com) -->
 
-<!-- Web Site:  http://www.binarythings.com -->
+		<!-- Web Site:  http://www.binarythings.com -->
 
-<style>
+		<style>
 
-input {
+			input {
 
-	width: 100%;
+				width: 90%;
 
-	font-size: medium;
-}
+				font-size: medium;
+			}
 
-body {
+			input.hasil {
+				font-size: 18px;
+			}
 
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+			input.tombol {
+				font-size: 18px;
+			}
 
-	font-size: x-small;
+			input#C {
+				margin-left: 25px;
+			}
 
-	margin: 0px;
+			input.pilih {
+				padding-bottom: 10px;
+			}
 
-	padding: 0px;
+			body {
 
-}
+				font-family: Verdana, Arial, Helvetica, sans-serif;
 
-h1 {
+				font-size: medium;
 
-	font-size: medium;
+				margin: 0px;
 
-	font-weight: bold;
+				padding: 0px;
 
-}
+			}
 
-td {
+			h1 {
 
-	text-align: center;
+				font-size: medium;
 
-	vertical-align: middle;
+				font-weight: bold;
 
-}
+			}
 
-table {
+			td {
 
-	/*margin: 4px;  to align the table in the middle in the Firefox browser*/
+				text-align: center;
 
-	border: thick solid #0099FF;
+				vertical-align: middle;
 
-}
+			}
 
-</style>
+			table {
 
+				/*margin: 4px;  to align the table in the middle in the Firefox browser*/
 
+				border: thick solid #0099FF;
 
-<script language="JavaScript">
+			}
 
-var Result=0, Operator=0, Second=0, Ready=0, Done=1, Complete=0, Integer, CurrentValue;
+		</style>
 
-function reset(value)
 
-{
 
-	document.calculator.LED.value = value;
+		<script language="JavaScript">
 
-	Result = 0, Operator = 0, Second = 0, Ready = 0; Done = 1; Complete = 0;
+			var Result=0, Operator=0, Second=0, Ready=0, Done=1, Complete=0, Integer, CurrentValue;
 
-}
-
-function SetValue(NewValue)
-
-{
-
-	Integer = 1;
-
-	if(Second || Done)
-
-	{
-
-		Second = 0;
-
-		Done = 0;
-
-		CurrentValue = NewValue;
-
-	}
-
-	for(var i=0; i<CurrentValue.length; i++)
-
-		if (CurrentValue[i]=='.')
-
-			Integer=0;
-
-}
-
-function Click(Caption)
-
-{
-
-	CurrentValue = document.calculator.LED.value;
-
-	if(Caption=='.')
-
-	{
-
-		SetValue('0');
-
-		if(Integer)
-
-		{
-
-			CurrentValue += Caption;
-
-			document.calculator.LED.value = CurrentValue;
-
-			Complete = 0;
-
-		}
-
-	}
-
-	if (Caption.length == 1 && Caption>='0' && Caption<='9')
-
-	{
-
-		SetValue('');
-
-		if(CurrentValue=='0')
-
-			CurrentValue='';
-
-		CurrentValue += Caption;
-
-		document.calculator.LED.value = CurrentValue;
-
-		Complete = 1;
-
-	}
-
-	if (Caption=='pi')
-
-	{
-
-		CurrentValue = Math.PI;
-
-		document.calculator.LED.value = CurrentValue;
-
-		Complete = 1;
-
-	}
-
-	if (Caption=='e')
-
-	{
-
-		CurrentValue = Math.E;
-
-		document.calculator.LED.value = CurrentValue;
-
-		Complete = 1;
-
-	}
-
-	if(Caption=='-' || Caption=='+' || Caption=='/' || Caption=='*' || Caption=='^')
-
-	{
-
-		if(Second)
-
-			Operator = Caption
-
-		else
-
-		{
-
-			if(!Ready)
+			function reset(value)
 
 			{
 
-				Operator = Caption;
+				document.calculator.LED.value = value;
 
-				Result = CurrentValue;
+				Result = 0, Operator = 0, Second = 0, Ready = 0; Done = 1; Complete = 0;
 
-				Ready=1;
+			}
 
-			} else
+			function SetValue(NewValue)
 
 			{
 
-				if (Operator=='^')
+				Integer = 1;
 
-					Result = Math.pow(Result, CurrentValue);
+				if(Second || Done)
 
-				else
+				{
 
-					Result = eval(Result + Operator + CurrentValue);
+					Second = 0;
 
-				Operator = Caption; document.calculator.LED.value = Result;
+					Done = 0;
 
-			} Complete=0; Second = 1;
+					CurrentValue = NewValue;
 
-		}
+				}
 
-	}
+				for(var i=0; i<CurrentValue.length; i++)
 
-	if(Caption=='1/x' )
+					if (CurrentValue[i]=='.')
 
-	{
+						Integer=0;
 
-		Result = eval('1/' + CurrentValue) ; reset(Result);
+			}
 
-	}
+			function Click(Caption)
 
-	if(Caption=='sqrt')
+			{
 
-	{
+				CurrentValue = document.calculator.LED.value;
 
-		Result = Math.sqrt(CurrentValue);
+				if(Caption=='.')
 
-		reset(Result);
+				{
 
-	}
+					SetValue('0');
 
-	if(Caption=='exp' )
+					if(Integer)
 
-	{
+					{
 
-		Result = Math.exp(CurrentValue);
+						CurrentValue += Caption;
 
-		reset(Result);
+						document.calculator.LED.value = CurrentValue;
 
-	}
+						Complete = 0;
 
-	if(Caption=='log' )
+					}
 
-	{
+				}
 
-		Result = Math.log(CurrentValue) / Math.LN10;
+				if (Caption.length == 1 && Caption>='0' && Caption<='9')
 
-		reset(Result);
+				{
 
-	}
+					SetValue('');
 
-	if(Caption=='ln' )
+					if(CurrentValue=='0')
 
-	{
+						CurrentValue='';
 
-		Result = Math.log(CurrentValue);
+					CurrentValue += Caption;
 
-		reset(Result);
+					document.calculator.LED.value = CurrentValue;
 
-	}
+					Complete = 1;
 
-	if(Caption=='sin' )
+				}
 
-	{
+				if (Caption=='pi')
 
-		Result = CurrentValue;
+				{
 
-		if (document.calculator.angle[0].checked)
+					CurrentValue = Math.PI;
 
-			Result = Result * Math.PI / 180;
+					document.calculator.LED.value = CurrentValue;
 
-		if (document.calculator.angle[2].checked)
+					Complete = 1;
 
-			Result = Result * Math.PI / 200;
+				}
 
-		Result = Math.sin(Result);
+				if (Caption=='e')
 
-		reset(Result);
+				{
 
-	}
+					CurrentValue = Math.E;
 
-	if(Caption=='cos' )
+					document.calculator.LED.value = CurrentValue;
 
-	{
+					Complete = 1;
 
-		Result = CurrentValue;
+				}
 
-		if (document.calculator.angle[0].checked)
+				if(Caption=='-' || Caption=='+' || Caption=='/' || Caption=='*' || Caption=='^')
 
-			Result = Result * Math.PI / 180;
+				{
 
-		if (document.calculator.angle[2].checked)
+					if(Second)
 
-			Result = Result * Math.PI / 200;
+						Operator = Caption
 
-		Result = Math.cos(Result);
+					else
 
-		reset(Result);
+					{
 
-	}
+						if(!Ready)
 
-	if(Caption=='tan' )
+						{
 
-	{
+							Operator = Caption;
 
-		Result = CurrentValue;
+							Result = CurrentValue;
 
-		if (document.calculator.angle[0].checked)
+							Ready=1;
 
-			Result = Result * Math.PI / 180;
+						} else
 
-		if (document.calculator.angle[2].checked)
+						{
 
-			Result = Result * Math.PI / 200;
+							if (Operator=='^')
 
-		Result = Math.tan(Result);
+								Result = Math.pow(Result, CurrentValue);
 
-		reset(Result);
+							else
 
-	}
+								Result = eval(Result + Operator + CurrentValue);
 
-	if(Caption=='asin' )
+							Operator = Caption; document.calculator.LED.value = Result;
 
-	{
+						} Complete=0; Second = 1;
 
-		Result = Math.asin(CurrentValue);
+					}
 
-		if (document.calculator.angle[0].checked)
+				}
 
-			Result = Result * 180 / Math.PI;
+				if(Caption=='1/x' )
 
-		if (document.calculator.angle[2].checked)
+				{
 
-			Result = Result * 200 / Math.PI;
+					Result = eval('1/' + CurrentValue) ; reset(Result);
 
-		reset(Result);
+				}
 
-	}
+				if(Caption=='sqrt')
 
-	if(Caption=='acos' )
+				{
 
-	{
+					Result = Math.sqrt(CurrentValue);
 
-		Result = Math.acos(CurrentValue);
+					reset(Result);
 
-		if (document.calculator.angle[0].checked)
+				}
 
-			Result = Result * 180 / Math.PI;
+				if(Caption=='exp' )
 
-		if (document.calculator.angle[2].checked)
+				{
 
-			Result = Result * 200 / Math.PI;
+					Result = Math.exp(CurrentValue);
 
-		reset(Result);
+					reset(Result);
 
-	}
+				}
 
-	if(Caption=='atan' )
+				if(Caption=='log' )
 
-	{
+				{
 
-		Result = Math.atan(CurrentValue);
+					Result = Math.log(CurrentValue) / Math.LN10;
 
-		if (document.calculator.angle[0].checked)
+					reset(Result);
 
-			Result = Result * 180 / Math.PI;
+				}
 
-		if (document.calculator.angle[2].checked)
+				if(Caption=='ln' )
 
-			Result = Result * 200 / Math.PI;
+				{
 
-		reset(Result);
+					Result = Math.log(CurrentValue);
 
-	}
+					reset(Result);
 
-	if(Caption=='sinh' )
+				}
 
-	{
+				if(Caption=='sin' )
 
-		Result = Math.exp(CurrentValue);
+				{
 
-		Result = (Result - 1 / Result) / 2;
+					Result = CurrentValue;
 
-		reset(Result);
+					if (document.calculator.angle[0].checked)
 
-	}
+						Result = Result * Math.PI / 180;
 
-	if(Caption=='cosh' )
+					if (document.calculator.angle[2].checked)
 
-	{
+						Result = Result * Math.PI / 200;
 
-		Result = Math.exp(CurrentValue);
+					Result = Math.sin(Result);
 
-		Result = (Result + 1 / Result) / 2;
+					reset(Result);
 
-		reset(Result);
+				}
 
-	}
+				if(Caption=='cos' )
 
-	if(Caption=='tanh' )
+				{
 
-	{
+					Result = CurrentValue;
 
-		Result = Math.exp(CurrentValue);
+					if (document.calculator.angle[0].checked)
 
-		Result = (Result - 1 / Result) / (Result + 1 / Result);
+						Result = Result * Math.PI / 180;
 
-		reset(Result);
+					if (document.calculator.angle[2].checked)
 
-	}
+						Result = Result * Math.PI / 200;
 
-	if(Caption=='asinh' )
+					Result = Math.cos(Result);
 
-	{
+					reset(Result);
 
-	//sign(x) * log(|x| + sqrt(x*x+1))
+				}
 
-	//	alert(CurrentValue + Math.sqrt(CurrentValue * CurrentValue + 1));
+				if(Caption=='tan' )
 
-	//	Result = Math.log(CurrentValue + Math.sqrt(CurrentValue * CurrentValue + 1));
+				{
 
-		Result = CurrentValue / Math.abs(CurrentValue) * Math.log(Math.abs(CurrentValue) + Math.sqrt(CurrentValue * CurrentValue + 1));
+					Result = CurrentValue;
 
-		reset(Result);
+					if (document.calculator.angle[0].checked)
 
-	}
+						Result = Result * Math.PI / 180;
 
-	if(Caption=='acosh' )
+					if (document.calculator.angle[2].checked)
 
-	{
+						Result = Result * Math.PI / 200;
 
-	//2 log  (sqrt((x+1)/2) + sqrt((x-1)/2)) 
+					Result = Math.tan(Result);
 
-		Result = 2 * Math.log(Math.sqrt((CurrentValue + 1) / 2) + Math.sqrt((CurrentValue - 1) / 2));
+					reset(Result);
 
-		reset(Result);
+				}
 
-	}
+				if(Caption=='asin' )
 
-	if(Caption=='atanh' )
+				{
 
-	{
+					Result = Math.asin(CurrentValue);
 
-	//0.5*log((x-1)/(x+1))
+					if (document.calculator.angle[0].checked)
 
-		Result = Math.log((CurrentValue - 1) / (CurrentValue + 1)) / 2;
+						Result = Result * 180 / Math.PI;
 
-		reset(Result);
+					if (document.calculator.angle[2].checked)
 
-	}
+						Result = Result * 200 / Math.PI;
 
-	if(Caption=='+/-')
+					reset(Result);
 
-		document.calculator.LED.value = eval(-CurrentValue);
-	/*
-   if(Caption== "=") 
-      {  // EXPERIMENT Nov 2007
-	  document.calculator.LED.value = eval(CurrentValue.toString());
-	  
-	  }
-	 */ 
-	  
-	if(Caption=='=' && Complete && Operator!='0')
+				}
 
-	{
+				if(Caption=='acos' )
 
-		if (Operator=='^')
+				{
 
-		{
+					Result = Math.acos(CurrentValue);
 
-			Result = Math.pow(Result, CurrentValue);
+					if (document.calculator.angle[0].checked)
 
-			reset(Result);
+						Result = Result * 180 / Math.PI;
 
-		} else
+					if (document.calculator.angle[2].checked)
 
-			reset(eval(Result + Operator + CurrentValue));
+						Result = Result * 200 / Math.PI;
 
-	}
+					reset(Result);
 
-	if (Caption=='C')
+				}
 
-		reset(0);
+				if(Caption=='atan' )
 
-	if(document.calculator.LED.value[0] == '.')
+				{
 
-		document.calculator.LED.value = '0' + document.calculator.LED.value;
+					Result = Math.atan(CurrentValue);
 
-}
-function translate()
-{
-if (opener!=null) 
-   {opener.translateHTML(document);}
-else if ((parent!=null) && parent.translateHTML) 
-   {parent.translateHTML(document);}
-}
+					if (document.calculator.angle[0].checked)
 
-</script>
-</head>
+						Result = Result * 180 / Math.PI;
 
-<body onLoad="translate();">
-<!-- This script and many more are available free online at -->
+					if (document.calculator.angle[2].checked)
 
-<!-- The JavaScript Source!! http://javascript.internet.com -->
+						Result = Result * 200 / Math.PI;
 
-<!-- Original:  Denis Makarov (info@binarythings.com) -->
+					reset(Result);
 
-<!-- Web Site:  http://www.binarythings.com -->
+				}
 
-<form name="calculator">
+				if(Caption=='sinh' )
 
-  <h1 align="center"> </h1>
+				{
 
-  <h1 align="center">Scientific calculator</h1>
-  
+					Result = Math.exp(CurrentValue);
 
-  <table align="center" width="400" height="240" border="0" cellpadding="2" cellspacing="0">
+					Result = (Result - 1 / Result) / 2;
 
-    <tr> 
+					reset(Result);
 
-      <td colspan="4"> <input name="LED" type="text" value="0"> </td>
+				}
 
-      <td><input type="button" name="C" value="C" onclick="Click('C')"></td>
+				if(Caption=='cosh' )
 
-      <td width="60"><input name="=" type="button" id="=2" value="=" onclick="Click('=')">
+				{
 
-      </td>
+					Result = Math.exp(CurrentValue);
 
-    </tr>
+					Result = (Result + 1 / Result) / 2;
 
-    <tr> 
+					reset(Result);
 
-      <td colspan="2"> <input name="angle" type="radio" checked> Degrees</td>
+				}
 
-      <td colspan="2"> <input name="angle" type="radio"> Radians</td>
+				if(Caption=='tanh' )
 
-      <td colspan="2"> <input name="angle" type="radio"> Gradients</td>
+				{
 
-    </tr>
+					Result = Math.exp(CurrentValue);
 
-    <tr> 
+					Result = (Result - 1 / Result) / (Result + 1 / Result);
 
-      <td width="60"> <input name="sin" type="button" id="sin" value="sin" onclick="Click('sin')"></td>
+					reset(Result);
 
-      <td width="60"> <input name="cos" type="button" id="cos" value="cos" onclick="Click('cos')"></td>
+				}
 
-      <td width="60"> <input name="tab" type="button" id="tab" value="tan" onclick="Click('tan')"></td>
+				if(Caption=='asinh' )
 
-      <td width="60"> <input name="sinh" type="button" id="sinh" value="sinh" onclick="Click('sinh')"></td>
+				{
 
-      <td width="60"> <input name="cosh" type="button" id="cosh" value="cosh" onclick="Click('cosh')"></td>
+				//sign(x) * log(|x| + sqrt(x*x+1))
 
-      <td width="60"> <input name="tanh" type="button" id="tanh" value="tanh" onclick="Click('tanh')"></td>
+				//	alert(CurrentValue + Math.sqrt(CurrentValue * CurrentValue + 1));
 
-    </tr>
+				//	Result = Math.log(CurrentValue + Math.sqrt(CurrentValue * CurrentValue + 1));
 
-    <tr> 
+					Result = CurrentValue / Math.abs(CurrentValue) * Math.log(Math.abs(CurrentValue) + Math.sqrt(CurrentValue * CurrentValue + 1));
 
-      <td width="60"> <input name="asin" type="button" id="asin" value="asin" onclick="Click('asin')"></td>
+					reset(Result);
 
-      <td width="60"> <input name="acos" type="button" id="acos" value="acos" onclick="Click('acos')"></td>
+				}
 
-      <td width="60"> <input name="atan" type="button" id="atan" value="atan" onclick="Click('atan')"></td>
+				if(Caption=='acosh' )
 
-      <td width="60"> <input name="asinh" type="button" id="asinh" value="asinh" onclick="Click('asinh')"> 
+				{
 
-      </td>
+				//2 log  (sqrt((x+1)/2) + sqrt((x-1)/2)) 
 
-      <td width="60"> <input name="acosh" type="button" id="acosh" value="acosh" onclick="Click('acosh')"> 
+					Result = 2 * Math.log(Math.sqrt((CurrentValue + 1) / 2) + Math.sqrt((CurrentValue - 1) / 2));
 
-      </td>
+					reset(Result);
 
-      <td width="60"> <input name="atanh" type="button" id="atanh" value="atanh" onclick="Click('atanh')"></td>
+				}
 
-    </tr>
+				if(Caption=='atanh' )
 
-    <tr> 
+				{
 
-      <td width="60"><input name="exp" type="button" id="exp" value="exp" onclick="Click('exp')"> 
+				//0.5*log((x-1)/(x+1))
 
-      </td>
+					Result = Math.log((CurrentValue - 1) / (CurrentValue + 1)) / 2;
 
-      <td width="60"><input name="7" type="button" id="7" value="7" onclick="Click('7')"> 
+					reset(Result);
 
-      </td>
+				}
 
-      <td width="60"><input name="8" type="button" id="8" value="8" onclick="Click('8')"> 
+				if(Caption=='+/-')
 
-      </td>
+					document.calculator.LED.value = eval(-CurrentValue);
+				/*
+			if(Caption== "=") 
+				{  // EXPERIMENT Nov 2007
+				document.calculator.LED.value = eval(CurrentValue.toString());
+				
+				}
+				*/ 
+				
+				if(Caption=='=' && Complete && Operator!='0')
 
-      <td width="60"><input name="9" type="button" id="9" value="9" onclick="Click('9')"> 
+				{
 
-      </td>
+					if (Operator=='^')
 
-      <td width="60"><input name="+" type="button" id="+" value="+" onclick="Click('+')"> 
+					{
 
-      </td>
+						Result = Math.pow(Result, CurrentValue);
 
-      <td width="60"><input name="^" type="button" id="^" value="^" onclick="Click('^')">
+						reset(Result);
 
-      </td>
+					} else
 
-    </tr>
+						reset(eval(Result + Operator + CurrentValue));
 
-    <tr> 
+				}
 
-      <td width="60"><input name="log" type="button" id="log" value="log" onclick="Click('log')"> 
+				if (Caption=='C')
 
-      </td>
+					reset(0);
 
-      <td width="60"><input name="4" type="button" id="4" value="4" onclick="Click('4')"> 
+				if(document.calculator.LED.value[0] == '.')
 
-      </td>
+					document.calculator.LED.value = '0' + document.calculator.LED.value;
 
-      <td width="60"><input name="5" type="button" id="5" value="5" onclick="Click('5')"> 
+			}
+			function translate()
+			{
+				if (opener!=null) 
+					{opener.translateHTML(document);}
+				else if ((parent!=null) && parent.translateHTML) 
+					{parent.translateHTML(document);}
+			}
 
-      </td>
+		</script>
+	</head>
 
-      <td width="60"><input name="6" type="button" id="6" value="6" onclick="Click('6')"></td>
+	<body onLoad="translate();">
+		<!-- This script and many more are available free online at -->
 
-      <td width="60"><input name="-" type="button" id="-" value="-" onclick="Click('-')"> 
+		<!-- The JavaScript Source!! http://javascript.internet.com -->
 
-      </td>
+		<!-- Original:  Denis Makarov (info@binarythings.com) -->
 
-      <td width="60"><input name="1/x" type="button" id="1/x2" value="1/x" onclick="Click('1/x')">
+		<!-- Web Site:  http://www.binarythings.com -->
 
-      </td>
+		<div class="container">
 
-    </tr>
+			<form name="calculator">
 
-    <tr> 
+				<h1 class="mt-5 h1" align="center">Scientific calculator</h1>
+			
+				<table class="table table-borderless w-auto mt-3" align="center" width="600" height="400" border="0" cellpadding="2" cellspacing="0">
 
-      <td width="60"><input name="ln" type="button" id="abs22" value="ln" onclick="Click('ln')"> 
+					<tr> 
 
-      </td>
+						<td scope="col" colspan="4"> <input name="LED" type="text" class="form-control hasil" value="0"> </td>
 
-      <td width="60"><input name="1" type="button" id="1" value="1" onclick="Click('1')"> 
+						<td scope="col"><input type="button" class="btn btn-primary tombol" soid="C" name="C" value="C" onclick="Click('C')"></td>
 
-      </td>
+						<td scope="col" width="60"><input class="btn btn-primary tombol" name="=" type="button" id="=2" value="=" onclick="Click('=')"></td>
 
-      <td width="60"><input name="2" type="button" id="2" value="2" onclick="Click('2')"> 
+					</tr>
 
-      </td>
+					<tr> 
 
-      <td width="60"><input name="3" type="button" id="3" value="3" onclick="Click('3')"> 
+						<td colspan="2"> <input class="form-check-input" name="angle" type="radio" class="pilih" checked> Degrees</td>
 
-      </td>
+						<td colspan="2"> <input class="form-check-input" name="angle" type="radio" class="pilih"> Radians</td>
 
-      <td width="60"><input name="*" type="button" id="*" value="*" onclick="Click('*')"> 
+						<td colspan="2"> <input class="form-check-input" name="angle" type="radio" class="pilih"> Gradients</td>
 
-      </td>
+					</tr>
 
-      <td width="60"><input name="pi" type="button" id="pi3" value="pi" onclick="Click('pi')">
+					<tr> 
 
-      </td>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="sin" type="button" id="sin" value="sin" onclick="Click('sin')"></td>
 
-    </tr>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="cos" type="button" id="cos" value="cos" onclick="Click('cos')"></td>
 
-    <tr> 
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="tab" type="button" id="tab" value="tan" onclick="Click('tan')"></td>
 
-      <td width="60"><input name="sqrt" type="button" id="sqrt" value="sqrt" onclick="Click('sqrt')"> 
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="sinh" type="button" id="sinh" value="sinh" onclick="Click('sinh')"></td>
 
-      </td>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="cosh" type="button" id="cosh" value="cosh" onclick="Click('cosh')"></td>
 
-      <td width="60"><input name="0" type="button" id="0" value="0" onclick="Click('0')"> 
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="tanh" type="button" id="tanh" value="tanh" onclick="Click('tanh')"></td>
 
-      </td>
+					</tr>
 
-      <td width="60"><input name="." type="button" id="." value="." onclick="Click('.')"> 
+					<tr> 
 
-      </td>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="asin" type="button" id="asin" value="asin" onclick="Click('asin')"></td>
 
-      <td width="60"><input name="+/-" type="button" id="+/-2" value="+/-" onclick="Click('+/-')"> 
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="acos" type="button" id="acos" value="acos" onclick="Click('acos')"></td>
 
-      </td>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="atan" type="button" id="atan" value="atan" onclick="Click('atan')"></td>
 
-      <td width="60"><input name="/" type="button" id="/" value="/" onclick="Click('/')"> 
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="asinh" type="button" id="asinh" value="asinh" onclick="Click('asinh')"></td>
 
-      </td>
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="acosh" type="button" id="acosh" value="acosh" onclick="Click('acosh')"></td>
 
-      <td width="60"><input name="e" type="button" id="pi4" value="e" onclick="Click('e')">
+						<td width="60"> <input class="btn btn-primary tombol" style="width: 90px;" name="atanh" type="button" id="atanh" value="atanh" onclick="Click('atanh')"></td>
 
-      </td>
+					</tr>
 
-    </tr>
+					<tr> 
 
-  </table>
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="exp" type="button" id="exp" value="exp" onclick="Click('exp')"></td>
 
-</form>
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="7" type="button" id="7" value="7" onclick="Click('7')"></td>
 
-<p><center>
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="8" type="button" id="8" value="8" onclick="Click('8')"></td>
 
-<font face="arial, helvetica" size"-2">Adapted from 'The JavaScript Source'
-<br>at "http://javascript.internet.com"</font>
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="9" type="button" id="9" value="9" onclick="Click('9')"></td>
 
-</center><p>
+						<td width="60"><input class="btn btn-outline-primary tombol" style="width: 90px;" name="+" type="button" id="+" value="+" onclick="Click('+')"></td>
 
-<!-- Script Size:  11.98 KB -->
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="^" type="button" id="^" value="^" onclick="Click('^')"></td>
+
+					</tr>
+
+					<tr> 
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="log" type="button" id="log" value="log" onclick="Click('log')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="4" type="button" id="4" value="4" onclick="Click('4')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="5" type="button" id="5" value="5" onclick="Click('5')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="6" type="button" id="6" value="6" onclick="Click('6')"></td>
+
+						<td width="60"><input class="btn btn-outline-primary tombol" style="width: 90px;" name="-" type="button" id="-" value="-" onclick="Click('-')"></td>
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="1/x" type="button" id="1/x2" value="1/x" onclick="Click('1/x')"></td>
+
+					</tr>
+
+					<tr> 
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="ln" type="button" id="abs22" value="ln" onclick="Click('ln')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="1" type="button" id="1" value="1" onclick="Click('1')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="2" type="button" id="2" value="2" onclick="Click('2')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="3" type="button" id="3" value="3" onclick="Click('3')"></td>
+
+						<td width="60"><input class="btn btn-outline-primary tombol" style="width: 90px;" name="*" type="button" id="*" value="*" onclick="Click('*')"></td>
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="pi" type="button" id="pi3" value="pi" onclick="Click('pi')"></td>
+
+					</tr>
+
+					<tr> 
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="sqrt" type="button" id="sqrt" value="sqrt" onclick="Click('sqrt')"></td>
+
+						<td width="60"><input class="btn btn-link border-primary rounded tombol" style="width: 90px;" name="0" type="button" id="0" value="0" onclick="Click('0')"></td>
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="." type="button" id="." value="." onclick="Click('.')"></td>
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="+/-" type="button" id="+/-2" value="+/-" onclick="Click('+/-')"></td>
+
+						<td width="60"><input class="btn btn-outline-primary tombol" style="width: 90px;" name="/" type="button" id="/" value="/" onclick="Click('/')"></td>
+
+						<td width="60"><input class="btn btn-primary tombol" style="width: 90px;" name="e" type="button" id="pi4" value="e" onclick="Click('e')"></td>
+
+					</tr>
+
+				</table>
+
+			</form>
+		
+		</div>
+
+		<p><center>
+
+		<font face="arial, helvetica" size"-2">Adapted from 'The JavaScript Source'
+		<br>at "http://javascript.internet.com"</font>
+
+		</center><p>
+
+		<!-- Script Size:  11.98 KB -->
 
 </body>
 <script language="JavaScript">
