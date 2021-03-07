@@ -29,11 +29,11 @@ li img {
 
 .title {
     height: 30px;
-    line-height: 30px;
+    line-height: 40px;
 }
 
 .result {
-    height: 120px;
+    height: 98px;
     text-align: right;
 }
 
@@ -88,18 +88,22 @@ li img {
 
 /*计算器标准版界面开始*/
 .standard-main {
-    width: 350px;
-    height: 480px;
+    width: 400px;
+    height: 497px;
 }
 
 #std-top-symbol {
     border-top: 1px #A7A7A7 solid;
     height: 52px;
+    width: 350px;
+    margin-left: 25px;
 }
 
 #std-num-symbol {
     background-color: #E6E6E6;
     height: 270px;
+    width: 350px;
+    margin-left: 25px;
     font-size: 20px;
 }
 
@@ -114,17 +118,20 @@ li img {
 /*科学型界面开始*/
 .science-main {
     display: none;
-    width: 350px;
+    width: 400px;
+    height: 540px;
 }
 
 .sci-result {
-    height: 120px;
+    height: 98px;
     text-align: right;
 }
 
 #sci-top-symbol {
     border-top: 1px #A7A7A7 solid;
-    height: 135px;
+    height: 130px;
+    width: 350px;
+    margin-left: 25px;
 }
 
 #sci-top-symbol li,
@@ -135,6 +142,8 @@ li img {
 
 #sci-num-symbol {
     height: 235px;
+    width: 350px;
+    margin-left: 25px;
     background-color: #E6E6E6;
 }
 
@@ -143,17 +152,20 @@ li img {
 /*程序员型界面开始*/
 .programmer-main {
     display: none;
-    width: 350px;
+    height: 556px;
+    width: 400px;
 }
 
 .pro-result {
-    height: 220px;
+    height: 200px;
     text-align: right;
 }
 
 #pro-top-symbol {
     border-top: 1px #A7A7A7 solid;
     height: 45px;
+    width: 350px;
+    margin-left: 25px;
 }
 
 #pro-top-symbol li {
@@ -169,6 +181,8 @@ li img {
 #pro-num-symbol {
     height: 235px;
     background-color: #E6E6E6;
+    width: 350px;
+    margin-left: 25px;
 }
 
 /*四个进制*/

@@ -13,32 +13,28 @@
 
 <body>
     <!--标准型-->
-    <div class="standard-main" id="std-main">
-        <div class="title ml-2">
+    <div class="rounded standard-main" id="std-main">
+        <div class="title ml-3">
             Calculator
         </div>
         <!--结果显示区域-->
-        <div class="result">
+        <div class="result ml-3">
             <!--显示类型信息-->
             <div class="type" id="std-show-bar">
                 ☰&nbsp;&nbsp;&nbsp;Standard
             </div>
-            <!--上一步的结果-->
-            <div class="pre" id="std-pre-step">
-                &nbsp;
-            </div>
             <!--第二个/运算结果-->
-            <div class="second" id="std-show-input">0</div>
+            <div class="second mr-3" id="std-show-input">0</div>
         </div>
         <ul id="std-top-symbol">
-            <li class="btn btn-primary" value="17">%</li>
+            <li value="17">%</li>
             <li value="18">√</li>
             <li value="19"><img src= <?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
             <li value="20"><img src= <?= base_url("assets/images/1_x.png") ?> /></li>
         </ul>
         <!--数字和符号-->
-        <ul id="std-num-symbol">
-            <li value="37">CE</li>
+        <ul class="rounded" id="std-num-symbol">
+            <li value="37"><button class="btn btn-lg btn-primary">CE</button></li>
             <li value="38">C</li>
             <li value="39">Back</li>
             <li value="16">÷</li>
@@ -67,22 +63,18 @@
         </ul>
     </div>
     <!--科学型-->
-    <div class="science-main" id="sci-main">
-        <div class="title ml-2">
+    <div class="rounded science-main" id="sci-main">
+        <div class="title ml-3">
             Calculator
         </div>
         <!--结果显示区域-->
-        <div class="sci-result">
+        <div class="sci-result ml-3">
             <!--显示类型信息-->
             <div class="type" id="sci-show-bar">
                 ☰&nbsp;&nbsp;&nbsp;Science
             </div>
-            <!--上一步的结果-->
-            <div class="pre" id="sci-pre-step">
-                &nbsp;
-            </div>
             <!--第二个/运算结果-->
-            <div class="second" id="sci-show-input">0</div>
+            <div class="second mr-3" id="sci-show-input">0</div>
         </div>
         <!--上面的3行运算符-->
         <ul id="sci-top-symbol">
@@ -103,7 +95,7 @@
             <li value="34">tanh</li>
         </ul>
         <!--数字和符号-->
-        <ul id="sci-num-symbol">
+        <ul class="rounded list-inline" id="sci-num-symbol">
             <li value="35">π</li>
             <li value="37">CE</li>
             <li value="38">C</li>
@@ -122,7 +114,7 @@
             <li value="20"><img src= <?= base_url("assets/images/1_x.png") ?> /></li>
             <li value="1" class="number">1</li>
             <li value="2" class="number">2</li>
-            <li value="3" class="number">3</li>
+            <li value="3" class="list-inline-itemnumber">3</li>
             <li value="13">+</li>
             <li value="36">↑</li>
             <li value="11">±</li>
@@ -138,22 +130,18 @@
         </ul>
     </div>
     <!--程序员型-->
-    <div class="programmer-main" id="pro-main">
-        <div class="title ml-2">
+    <div class="rounded programmer-main" id="pro-main">
+        <div class="title ml-3">
             Calculator
         </div>
         <!--结果显示区域-->
-        <div class="pro-result">
+        <div class="pro-result ml-3">
             <!--显示类型信息-->
             <div class="type" id="pro-show-bar">
                 ☰&nbsp;&nbsp;&nbsp;Programmer
             </div>
-            <!--上一步的结果-->
-            <div class="pre" id="pro-pre-step">
-                &nbsp;
-            </div>
             <!--第二个/运算结果-->
-            <div class="second" id="pro-show-input">0</div>
+            <div class="second mr-3" id="pro-show-input">0</div>
             <!--显示16、10、8、2进制的值-->
             <div id="pro-scales">
                 <div scale="16">HEX&nbsp;&nbsp;&nbsp;<span>0</span></div>
@@ -172,7 +160,7 @@
             <li class="disable-btn" value="45">F</li>
         </ul>
         <!--数字和符号-->
-        <ul id="pro-num-symbol">
+        <ul class="rounded" id="pro-num-symbol">
             <li value="36">↑</li>
             <li value="37">CE</li>
             <li value="38">C</li>
