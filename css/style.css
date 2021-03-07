@@ -54,7 +54,7 @@ p {
 /* welcome Section */
 
 #welcome {
-    background-image: url(./img/welcome-bg.png);
+    background-image: url("../assets/images/welcome-bg.png");
     background-size: cover;
     background-position: top center;
     position: relative;

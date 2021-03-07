@@ -54,4 +54,5 @@ $route['default_controller'] = 'umum';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['calculator'] = 'calculator/index';
+$route['calculator'] = 'calculator';
+$route['regressions'] = 'regressions';
