@@ -20,6 +20,7 @@ class Umum extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('umum');
+		$data['title'] = 'Kalkulator Statistik Portable';
+		$this->load->view('umum', $data);
 	}
 }

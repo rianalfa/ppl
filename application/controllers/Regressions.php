@@ -26,6 +26,7 @@ class Regressions extends CI_Controller {
 		$points = [[1,2], [2,3], [4,5], [5,7], [6,8]];
 		$regression = new Regression\Linear($points);
 		$data['reg'] = $regression;
+		$data['title'] = 'Regression';
 		$this->load->view('regression', $data);
 	}
 }
