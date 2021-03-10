@@ -65,53 +65,37 @@
         function gettingStarted() {
             var main = document.getElementById('mainContainer');
             main.innerHTML = `
-                <div class="card mb-2 w-50 rounded">
+                <div class="card mb-2 rounded">
                     <label class="ml-3 mt-2" for="uploadFile">
-                        Silahkan unggah file data yang akan dihitung.
-                        <br>
-                        (File berekstensi 'xlsx' atau 'xls')
+                        Silahkan unggah file data yang akan dihitung. (File berekstensi 'xlsx' atau 'xls')
                     </label>
-                    <div class="d-flex justify-content-around">
-                        <input type="file" class="form-control-file p-2 ml-1" id="uploadFile" name="uploadFile" value="" required/>
+                    <div class="d-flex justify-content-between">
+                        <input type="file" class="form-control-file w-50 p-2 ml-1" id="uploadFile" name="uploadFile" value="" required/>
                         <button id="tombolnya" onclick="inputData();" class="btn btn-sm btn-secondary w-25 mr-2 mb-2" hidden>Input</button>
                     </div>
                 </div>
-                <table class="table table-light w-50 mt-2 rounded">
-                    <thead id="tableHead">
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Variabel X</th>
-                            <th scope="col">Variabel Y</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col">
+                        <table id="tableData" class="table table-light mt-2 rounded" hidden>
+                            <thead id="tableHead">
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table id="tableHasil" class="table table-light mt-2 rounded" hidden>
+                            <thead id="tableHead2">
+                                <tr>
+                                    <th class="w-25" scope="col"></th>
+                                    <th scope="col">Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody2">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             `;
 
             filenya = document.getElementById('uploadFile');
@@ -134,8 +118,9 @@
             request.onreadystatechange = function() {
                 if (request.readyState == 4 && request.status == 200) {
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
-                        datas = JSON.parse(request.responseText);
-                        setNewData(datas);
+                        response = JSON.parse(request.responseText);
+                        setNewData(response['datas']);
+                        setNewHasil(response);
                     } else {
                         alert("BABI");
                     }
@@ -145,13 +130,20 @@
         }
 
         function setNewData(datas) {
+            document.getElementById('tableData').hidden=false;
+            tableHead = document.getElementById('tableHead').innerHTML=`
+                <tr>
+                    <th style="width:75px;" scope="col">No.</th>
+                    <th scope="col">` + datas[0][0] + `</th>
+                    <th scope="col">` + datas[0][1] + `</th>
+                </tr>
+            `;
             tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = "";
-            i = 0;
-            for (var i = 0; i < datas.length; i++) {
+            for (var i = 1; i < datas.length; i++) {
                 tableBody.innerHTML += `
                     <tr>
-                        <th scope="row">` + i + `</th>
+                        <th style="width:75px;" scope="row">` + (i+1) + `</th>
                         <td>` + datas[i][0] + `</td>
                         <td>` + datas[i][1] + `</td>
                     </tr>
@@ -159,6 +151,45 @@
             }
             document.getElementById('uploadFile').value = "";
             document.getElementById('tombolnya').hidden = true;
+        }
+
+        function setNewHasil(hasils) {
+            document.getElementById('tableHasil').hidden=false;
+            tableBody = document.getElementById('tableBody2');
+            tableBody.innerHTML = `
+                <tr>
+                    <th class="w-25" scope="row">Gradien (m)</th>
+                    <td>` + String(hasils['m']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">Std. Error</th>
+                    <td>` + String(hasils['mse']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">t-Statistik</th>
+                    <td>` + String(hasils['mt']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">Probabilitas</th>
+                    <td>` + String(hasils['mp']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">R-squared</th>
+                    <td>` + String(hasils['r2']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">F-Statistik</th>
+                    <td>` + String(hasils['fs']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">Prob(F-Statistik)</th>
+                    <td>` + String(hasils['fp']).substr(0, 7) + `</td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="row">Persamaan<br>Regresi</th>
+                    <td>` + hasils['hasil'] + `</td>
+                </tr>
+            `;
         }
     </script>
 </body>

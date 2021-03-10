@@ -320,3 +320,15 @@ footer.footer ul {
 /*---------------------------------
 footer
 ----------------------*/
+
+table tbody {
+    display: block;
+    max-height: 350px;
+    overflow-y: scroll;
+}
+  
+  table thead, table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}

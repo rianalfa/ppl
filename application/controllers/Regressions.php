@@ -68,6 +68,19 @@ class Regressions extends CI_Controller {
 
 		}
 		unlink("./assets/externals/{$object['file_name']}");
-		$this->output->set_content_type('application/json')->set_output(json_encode($datas));
+
+		$regression = new Regression\Linear($datas);
+
+		$this->output->set_content_type('application/json')->set_output(json_encode(array(
+			'datas' => $datas,
+			'm' => $regression->getParameters()['m'],
+			'mse' => $regression->standardErrors()['m'],
+			'mt' => $regression->tValues()['m'],
+			'mp' => $regression->tProbability()['m'],
+			'r2' => $regression->r2(),
+			'fs' => $regression->fStatistic(),
+			'fp' => $regression->fProbability(),
+			'hasil' => $regression->getEquation()
+		)));
 	}
 }
