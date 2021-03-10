@@ -75,8 +75,14 @@ sidebar
     color: #c1c1c1!important;
 }
 
-.navbar-nav>li>a.active {
-    color: #e9ecef!important;
+.submenu-box ul li a:hover {
+    color: #fff!important;
+    background: linear-gradient(90deg, rgba(59, 125, 221, .1), rgba(59, 125, 221, .0875) 50%, transparent);
+    border-left: solid #3b7ddd;
+}
+
+.navbar-nav>li>a:hover {
+    color: #fff!important;
     background: linear-gradient(90deg, rgba(59, 125, 221, .1), rgba(59, 125, 221, .0875) 50%, transparent);
     border-left: 4px solid #3b7ddd;
 }
@@ -222,22 +228,6 @@ cross-bar animation
 
 .nav-icon1 span:nth-of-type(3) {
     top: 16px;
-}
-
-.nav-icon1.open span:nth-of-type(1) {
-    top: 8px;
-    transform: rotate(135deg);
-}
-
-.nav-icon1.open span:nth-of-type(2) {
-    top: 8px;
-    opacity: 0;
-    left: -30px;
-}
-
-.nav-icon1.open span:nth-of-type(3) {
-    top: 8px;
-    transform: rotate(-135deg);
 }
 
 

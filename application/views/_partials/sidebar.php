@@ -1,11 +1,11 @@
-<nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
+<nav class="fixed-top align-top toggled" id="sidebar-wrapper" role="navigation">
     <div class="simplebar-content" style="padding: 0px;">
         <a class="sidebar-brand" href="">
             <span class="align-middle">Menu</span>
         </a>
         <ul class="navbar-nav align-self-stretch">
             <li class="">
-                <a href="<?= base_url() ?>" class="nav-link text-left active" role="button" aria-haspopup="true" aria-expanded="false">
+                <a href="<?= base_url("umum") ?>" class="nav-link text-left" role="button">
                     <i class="flaticon-bar-chart-1"></i> Halaman Utama
                 </a>
             </li>
@@ -35,7 +35,7 @@
                                             <li><a href="">Korelasi</a></li>
                                             <li><a href="">Outlier</a></li>
                                             <li><a href="">Variabel Acak</a></li>
-                                            <li><a href="<?= base_url("regressions") ?>">Regresi</a></li>
+                                            <li><a href="<?= base_url("regressions") ?>">Regresi Linier</a></li>
                                             <li><a href="">Uji Signifikansi</a></li>
                                         </ul>
                                     </div>

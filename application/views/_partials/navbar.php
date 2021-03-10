@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light my-navbar">
+<nav class="navbar navbar-expand my-navbar">
     <!-- Sidebar Toggle (Topbar) -->
     <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
         <span></span>

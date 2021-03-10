@@ -1,7 +1,4 @@
 /*各界面共用部分开始*/
-* {
-    font-family: "微软雅黑";
-}
 
 .standard-main,
 .science-main,
@@ -42,7 +39,9 @@ li img {
     padding-right: 10px;
 }
 
+
 /*计算器类型*/
+
 .type {
     height: 20px;
     text-align: left;
@@ -52,7 +51,9 @@ li img {
     cursor: pointer;
 }
 
+
 /*类型选择侧边栏*/
+
 .type-bar {
     display: none;
     height: 90px;
@@ -73,14 +74,19 @@ li img {
     background-color: #CFCFCF;
 }
 
+
 /*数字加粗*/
+
 .number {
     font-weight: bold;
 }
 
+
 /*共用部分结束*/
 
+
 /*计算器标准版界面开始*/
+
 .standard-main {
     width: 400px;
     height: 497px;
@@ -107,9 +113,12 @@ li img {
     width: 87.5px;
 }
 
+
 /*标准界面结束*/
 
+
 /*科学型界面开始*/
+
 .science-main {
     display: none;
     width: 400px;
@@ -141,9 +150,12 @@ li img {
     background-color: #E6E6E6;
 }
 
+
 /*科学型界面结束*/
 
+
 /*程序员型界面开始*/
+
 .programmer-main {
     display: none;
     height: 556px;
@@ -179,7 +191,9 @@ li img {
     margin-left: 25px;
 }
 
+
 /*四个进制*/
+
 #pro-scales {
     margin-left: 20px;
 }
@@ -190,14 +204,19 @@ li img {
     cursor: pointer;
 }
 
+
 /*当前使用的进制*/
+
 .scale-active {
     color: cornflowerblue;
 }
 
+
 /*按键不可用*/
+
 .disable-btn {
     color: #CACACA;
 }
+
 
 /*程序员型界面结束*/
