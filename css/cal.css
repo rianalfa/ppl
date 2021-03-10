@@ -17,12 +17,6 @@ ul {
     padding: 0px;
 }
 
-li {
-    float: left;
-    text-align: center;
-    cursor: pointer;
-}
-
 li img {
     height: 14px;
 }

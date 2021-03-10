@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require 'vendor/autoload.php';
+require_once 'HTTP/Request2.php';
 use MathPHP\Statistics\Regression;
 
 class Regressions extends CI_Controller {
@@ -26,6 +28,45 @@ class Regressions extends CI_Controller {
 		$points = [[1,2], [2,3], [4,5], [5,7], [6,8]];
 		$regression = new Regression\Linear($points);
 		$data['reg'] = $regression;
+		$data['title'] = 'Regression';
 		$this->load->view('regression', $data);
+	}
+
+	public function inputData()
+	{
+		$config['upload_path'] = './assets/externals';
+		$config['allowed_types'] = 'xlsx|xls';
+		$config['max_filename'] = '255';
+        $config['encrypt_name'] = false;
+        $config['max_size'] = '5120';
+        $config['overwrite'] = true;
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('uploadFile')) {
+			$status = "error";
+            $msg = $this->upload->display_errors();
+		} else {
+			$object = $this->upload->data();
+			$namanya = "./assets/externals/{$object['file_name']}";
+			$datas = [];
+
+			if ($filen = SimpleXLSX::parse($namanya)) {
+				$j = 0;
+				$i = 0;
+				foreach ($filen->rows() as $r => $row) {
+					foreach ($row as $c => $cell) {
+						$data[$i] = $cell;
+						$i++;
+					}
+					$i=0;
+					array_push($datas, $data);
+				}
+				
+				$datas = array_values($datas);
+			}
+
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($datas));
 	}
 }
