@@ -67,6 +67,7 @@ class Regressions extends CI_Controller {
 			}
 
 		}
+		unlink("./assets/externals/{$object['file_name']}");
 		$this->output->set_content_type('application/json')->set_output(json_encode($datas));
 	}
 }

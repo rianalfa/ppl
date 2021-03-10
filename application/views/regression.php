@@ -79,9 +79,9 @@
                 <table class="table table-light w-50 mt-2 rounded">
                     <thead id="tableHead">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">X</th>
-                            <th scope="col">Y</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Variabel X</th>
+                            <th scope="col">Variabel Y</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
