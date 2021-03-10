@@ -5,14 +5,14 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
         <div class="overlay"></div>
 
         <!-- Sidebar -->
         <?php $this->load->view('_partials/sidebar'); ?>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" class="toggled">
             <div id="content">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
@@ -30,10 +30,10 @@
                                 <div class="col-md-12 mt-4" id="mainContainer">
                                     <div class="card mb-2">
                                         <h5>
-                                        Regresi adalah salah satu metode untuk menentukan hubungan sebab-akibat antara variabel dengan variabel lainnya. 
-                                        Dalam analisis regresi sederhana, hubungan antara variabel bersifat linier, 
-                                        di mana perubahan pada variabel X akan diikuti oleh perubahan pada variabel secara tetap. 
-                                        Sedangkan dalam hubungan nonlinier, perubahan X tidak diikuti dengan perubahan variabel Y secara proporsional.
+                                            Regresi adalah salah satu metode untuk menentukan hubungan sebab-akibat antara variabel dengan variabel lainnya.
+                                            Dalam analisis regresi sederhana, hubungan antara variabel bersifat linier,
+                                            di mana perubahan pada variabel X akan diikuti oleh perubahan pada variabel secara tetap.
+                                            Sedangkan dalam hubungan nonlinier, perubahan X tidak diikuti dengan perubahan variabel Y secara proporsional.
                                         </h5>
                                         <div class="d-flex justify-content-left">
                                             <button class="btn btn-secondary ml-2 mb-2" onclick="gettingStarted();">Getting Started</button>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Footer -->
                 <?php $this->load->view('_partials/footer'); ?>
 
@@ -62,7 +62,7 @@
 
         });
 
-        function gettingStarted(){
+        function gettingStarted() {
             var main = document.getElementById('mainContainer');
             main.innerHTML = `
                 <div class="card mb-2 w-50 rounded">
@@ -117,9 +117,9 @@
             filenya = document.getElementById('uploadFile');
             filenya.addEventListener('change', function(e) {
                 if (filenya.value == "") {
-                    document.getElementById("tombolnya").hidden=true;
+                    document.getElementById("tombolnya").hidden = true;
                 } else {
-                    document.getElementById("tombolnya").hidden=false;
+                    document.getElementById("tombolnya").hidden = false;
                 }
             });
         }
@@ -132,7 +132,7 @@
             request = new XMLHttpRequest();
             request.open('POST', '<?= base_url('regressions/inputData') ?>', true);
             request.onreadystatechange = function() {
-                if (request.readyState == 4 && request.status == 200){
+                if (request.readyState == 4 && request.status == 200) {
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         datas = JSON.parse(request.responseText);
                         setNewData(datas);
@@ -144,22 +144,23 @@
             request.send(datanya);
         }
 
-        function setNewData(datas){
+        function setNewData(datas) {
             tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML="";
-            i=0;
-            for (var i=0; i<datas.length; i++) {
-                tableBody.innerHTML+=`
+            tableBody.innerHTML = "";
+            i = 0;
+            for (var i = 0; i < datas.length; i++) {
+                tableBody.innerHTML += `
                     <tr>
-                        <th scope="row">`+i+`</th>
-                        <td>`+datas[i][0]+`</td>
-                        <td>`+datas[i][1]+`</td>
+                        <th scope="row">` + i + `</th>
+                        <td>` + datas[i][0] + `</td>
+                        <td>` + datas[i][1] + `</td>
                     </tr>
                 `;
             }
-            document.getElementById('uploadFile').value="";
-            document.getElementById('tombolnya').hidden=true;
+            document.getElementById('uploadFile').value = "";
+            document.getElementById('tombolnya').hidden = true;
         }
     </script>
 </body>
+
 </html>

@@ -11,7 +11,7 @@
         <?php $this->load->view('_partials/sidebar'); ?>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" class="toggled">
             <div id="content">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
@@ -19,14 +19,14 @@
                     <?php $this->load->view('_partials/navbar'); ?>
 
                     <!-- Begin Page Content -->
-                    <div class="container-fluid px-lg-4">
+                    <div class="container-fluid px-lg-12">
                         <div class="row">
                             <div class="col-md-12 mt-lg-4 mt-4">
                                 <div class="col-md-12 mt-4">
                                     <!--标准型-->
                                     <div class="rounded standard-main" id="std-main">
                                         <div class="title ml-3">
-                                        Kalkulator
+                                            Kalkulator
                                         </div>
                                         <!--结果显示区域-->
                                         <div class="result ml-3">
@@ -40,8 +40,8 @@
                                         <ul id="std-top-symbol">
                                             <li style="float: left; text-align: center; cursor: pointer;" value="17">%</li>
                                             <li style="float: left; text-align: center; cursor: pointer;" value="18">√</li>
-                                            <li style="float: left; text-align: center; cursor: pointer;" value="19"><img src= <?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
-                                            <li style="float: left; text-align: center; cursor: pointer;" value="20"><img src= <?= base_url("assets/images/1_x.png") ?> /></li>
+                                            <li style="float: left; text-align: center; cursor: pointer;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
+                                            <li style="float: left; text-align: center; cursor: pointer;" value="20"><img src=<?= base_url("assets/images/1_x.png") ?> /></li>
                                         </ul>
                                         <!--数字和符号-->
                                         <ul class="rounded" style="float: left; text-align: center; cursor: pointer;" id="std-num-symbol">
@@ -76,7 +76,7 @@
                                     <!--科学型-->
                                     <div class="rounded science-main" id="sci-main">
                                         <div class="title ml-3">
-                                        Kalkulator
+                                            Kalkulator
                                         </div>
                                         <!--结果显示区域-->
                                         <div class="sci-result ml-3">
@@ -91,15 +91,15 @@
                                         <ul id="sci-top-symbol">
                                             <li style="float: left; text-align: center;" value="21">(</li>
                                             <li style="float: left; text-align: center;" value="22">)</li>
-                                            <li style="float: left; text-align: center;" value="23"><img src= <?= base_url("assets/images/x_y_sqrt.png") ?> style="height: 18px;width: 22px;" /></li>
+                                            <li style="float: left; text-align: center;" value="23"><img src=<?= base_url("assets/images/x_y_sqrt.png") ?> style="height: 18px;width: 22px;" /></li>
                                             <li style="float: left; text-align: center;" value="24">n!</li>
                                             <li style="float: left; text-align: center;" value="25">Exp</li>
-                                            <li style="float: left; text-align: center;" value="19"><img src= <?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
-                                            <li style="float: left; text-align: center;" value="26"><img src= <?= base_url("assets/images/x_y.png") ?> style="height: 18px;" /></li>
+                                            <li style="float: left; text-align: center;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
+                                            <li style="float: left; text-align: center;" value="26"><img src=<?= base_url("assets/images/x_y.png") ?> style="height: 18px;" /></li>
                                             <li style="float: left; text-align: center;" value="27">sin</li>
                                             <li style="float: left; text-align: center;" value="28">cos</li>
                                             <li style="float: left; text-align: center;" value="29">tan</li>
-                                            <li style="float: left; text-align: center;" value="30"><img src= <?= base_url("assets/images/10_x.png") ?> /></li>
+                                            <li style="float: left; text-align: center;" value="30"><img src=<?= base_url("assets/images/10_x.png") ?> /></li>
                                             <li style="float: left; text-align: center;" value="31">log</li>
                                             <li style="float: left; text-align: center;" value="32">sinh</li>
                                             <li style="float: left; text-align: center;" value="33">cosh</li>
@@ -122,7 +122,7 @@
                                             <li style="float: left; text-align: center; font-weight: bold;" value="5" class="number">5</li>
                                             <li style="float: left; text-align: center; font-weight: bold;" value="6" class="number">6</li>
                                             <li style="float: left; text-align: center;" value="14">-</li>
-                                            <li style="float: left; text-align: center;" value="20"><img src= <?= base_url("assets/images/1_x.png") ?> /></li>
+                                            <li style="float: left; text-align: center;" value="20"><img src=<?= base_url("assets/images/1_x.png") ?> /></li>
                                             <li style="float: left; text-align: center; font-weight: bold;" value="1" class="number">1</li>
                                             <li style="float: left; text-align: center; font-weight: bold;" value="2" class="number">2</li>
                                             <li style="float: left; text-align: center; font-weight: bold;" value="3" class="list-inline-itemnumber">3</li>
@@ -143,7 +143,7 @@
                                     <!--程序员型-->
                                     <div class="rounded programmer-main" id="pro-main">
                                         <div class="title ml-3">
-                                        Kalkulator
+                                            Kalkulator
                                         </div>
                                         <!--结果显示区域-->
                                         <div class="pro-result ml-3">
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Footer -->
                 <?php $this->load->view('_partials/footer'); ?>
 
