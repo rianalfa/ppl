@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['calculator'] = 'calculator';
 $route['regressions'] = 'regressions';
+$route['regressions/inputData'] = 'regressions/inputData';

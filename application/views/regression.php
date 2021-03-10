@@ -27,15 +27,17 @@
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                     <h1 class="h3 mb-0 text-gray-800">Regresi</h1>
                                 </div>
-                                <div class="col-md-12 mt-4">
-                                    <div class="card">
+                                <div class="col-md-12 mt-4" id="mainContainer">
+                                    <div class="card mb-2">
                                         <h5>
-                                            <?php 
-                                                $param = $reg->getParameters();
-                                                echo '<p>'.$param['m'].'</p>';
-                                                echo '<p>'.$reg->getEquation().'</p>';
-                                            ?>
+                                        Regresi adalah salah satu metode untuk menentukan hubungan sebab-akibat antara variabel dengan variabel lainnya. 
+                                        Dalam analisis regresi sederhana, hubungan antara variabel bersifat linier, 
+                                        di mana perubahan pada variabel X akan diikuti oleh perubahan pada variabel secara tetap. 
+                                        Sedangkan dalam hubungan nonlinier, perubahan X tidak diikuti dengan perubahan variabel Y secara proporsional.
                                         </h5>
+                                        <div class="d-flex justify-content-left">
+                                            <button class="btn btn-secondary ml-2 mb-2" onclick="gettingStarted();">Getting Started</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -59,6 +61,105 @@
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
         });
+
+        function gettingStarted(){
+            var main = document.getElementById('mainContainer');
+            main.innerHTML = `
+                <div class="card mb-2 w-50 rounded">
+                    <label class="ml-3 mt-2" for="uploadFile">
+                        Silahkan unggah file data yang akan dihitung.
+                        <br>
+                        (File berekstensi 'xlsx' atau 'xls')
+                    </label>
+                    <div class="d-flex justify-content-around">
+                        <input type="file" class="form-control-file p-2 ml-1" id="uploadFile" name="uploadFile" value="" required/>
+                        <button id="tombolnya" onclick="inputData();" class="btn btn-sm btn-secondary w-25 mr-2 mb-2" hidden>Input</button>
+                    </div>
+                </div>
+                <table class="table table-light w-50 mt-2 rounded">
+                    <thead id="tableHead">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">X</th>
+                            <th scope="col">Y</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            filenya = document.getElementById('uploadFile');
+            filenya.addEventListener('change', function(e) {
+                if (filenya.value == "") {
+                    document.getElementById("tombolnya").hidden=true;
+                } else {
+                    document.getElementById("tombolnya").hidden=false;
+                }
+            });
+        }
+
+        function inputData() {
+            filenya = document.getElementById('uploadFile');
+            var file = filenya.files[0];
+            var datanya = new FormData();
+            datanya.append("uploadFile", file);
+            request = new XMLHttpRequest();
+            request.open('POST', '<?= base_url('regressions/inputData') ?>', true);
+            request.onreadystatechange = function() {
+                if (request.readyState == 4 && request.status == 200){
+                    if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
+                        datas = JSON.parse(request.responseText);
+                        setNewData(datas);
+                    } else {
+                        alert("BABI");
+                    }
+                }
+            }
+            request.send(datanya);
+        }
+
+        function setNewData(datas){
+            tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML="";
+            i=0;
+            for (var i=0; i<datas.length; i++) {
+                tableBody.innerHTML+=`
+                    <tr>
+                        <th scope="row">`+i+`</th>
+                        <td>`+datas[i][0]+`</td>
+                        <td>`+datas[i][1]+`</td>
+                    </tr>
+                `;
+            }
+            document.getElementById('uploadFile').value="";
+            document.getElementById('tombolnya').hidden=true;
+        }
     </script>
 </body>
 </html>
