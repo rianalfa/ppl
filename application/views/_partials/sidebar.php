@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="<?= base_url("calculator") ?>" class="nav-link text-left" role="button">
+                <a href="<?= base_url("kalkulator") ?>" class="nav-link text-left" role="button">
                     <i class="flaticon-bar-chart-1"></i> Kalkulator
                 </a>
             </li>
@@ -28,14 +28,14 @@
                                             <li><a href="">ANOVA</a></li>
                                             <li><a href="">Averages</a></li>
                                             <li><a href="">Circular</a></li>
-                                            <li><a href="">Deskriptif</a></li>
+                                            <li><a href="<?= base_url("deskriptif") ?>">Deskriptif</a></li>
                                             <li><a href="">Distance</a></li>
                                             <li><a href="">Distribusi</a></li>
                                             <li><a href="">Percobaan</a></li>
                                             <li><a href="">Korelasi</a></li>
                                             <li><a href="">Outlier</a></li>
                                             <li><a href="">Variabel Acak</a></li>
-                                            <li><a href="<?= base_url("regressions") ?>">Regresi Linier</a></li>
+                                            <li><a href="<?= base_url("regresi") ?>">Regresi Linier</a></li>
                                             <li><a href="">Uji Signifikansi</a></li>
                                         </ul>
                                     </div>

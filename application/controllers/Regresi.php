@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 require_once 'HTTP/Request2.php';
 use MathPHP\Statistics\Regression;
 
-class Regressions extends CI_Controller {
+class Regresi extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,11 +25,8 @@ class Regressions extends CI_Controller {
 
 	public function index()
 	{
-		$points = [[1,2], [2,3], [4,5], [5,7], [6,8]];
-		$regression = new Regression\Linear($points);
-		$data['reg'] = $regression;
-		$data['title'] = 'Regression';
-		$this->load->view('regression', $data);
+		$data['title'] = 'Regresi';
+		$this->load->view('regresi', $data);
 	}
 
 	public function inputData()
@@ -68,10 +65,16 @@ class Regressions extends CI_Controller {
 
 		}
 		unlink("./assets/externals/{$object['file_name']}");
+		$x = $datas[0][0];
+		$y = $datas[0][1];
+		unset($datas[0]);
+        $datas = array_values($datas);
 
 		$regression = new Regression\Linear($datas);
 
 		$this->output->set_content_type('application/json')->set_output(json_encode(array(
+			'x' => $x,
+			'y' => $y,
 			'datas' => $datas,
 			'm' => $regression->getParameters()['m'],
 			'mse' => $regression->standardErrors()['m'],
