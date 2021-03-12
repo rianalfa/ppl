@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'vendor/autoload.php';
 require_once 'HTTP/Request2.php';
 use MathPHP\Statistics\Regression;
 

@@ -321,6 +321,12 @@ footer.footer ul {
 footer
 ----------------------*/
 
+div#mainContainer {
+    display: block;
+    overflow-y: auto;
+    height: 550px;
+}
+
 table {
     display: block;
     max-height: 440px;

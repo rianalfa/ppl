@@ -27,7 +27,7 @@
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                     <h1 class="h3 mb-0 text-gray-800">Tentang</h1>
                                 </div>
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-12 mt-4" id="mainContainer">
                                     <div class="card">
                                         <h5>
                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has

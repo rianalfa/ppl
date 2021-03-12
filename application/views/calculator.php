@@ -22,7 +22,7 @@
                     <div class="container-fluid px-lg-12">
                         <div class="row">
                             <div class="col-md-12 mt-lg-4 mt-4">
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-12 mt-4" id="mainContainer">
                                     <!--标准型-->
                                     <div class="rounded standard-main" id="std-main">
                                         <div class="title ml-3">

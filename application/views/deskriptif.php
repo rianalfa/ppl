@@ -13,7 +13,7 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="toggled">
-            <div id="content">
+            <div id="content" style="height: 700px;">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
                     <!-- Navbar -->
@@ -118,6 +118,7 @@
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         response = JSON.parse(request.responseText);
                         setNewData(response['datas'], response['heads']);
+                        setNewHasil(response['stats'], response['heads']);
                     } else {
                         alert("BABI");
                     }
@@ -160,7 +161,6 @@
 
                 th = document.createElement('th');
                 th.setAttribute('style', 'width: 50px;');
-                th.setAttribute('class', 'border-left');
                 th.setAttribute('scope', 'row');
                 th.appendChild(document.createTextNode(i+1));
 
@@ -178,6 +178,155 @@
             }
             document.getElementById('uploadFile').value = "";
             document.getElementById('tombolnya').hidden = true;
+        }
+
+        function setNewHasil(stats, heads) {
+            tableHasil = document.getElementById('tableHasil').hidden = false;
+            tableHead = document.getElementById('tableHead2');
+            tableHead.innerHTML = "";
+
+            tr = document.createElement('tr');
+
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode(''));
+
+            tr.appendChild(th);
+
+            for (var i = 0; i < heads.length; i++) {
+                th = document.createElement('th');
+                th.setAttribute('style', 'width: 150px;');
+                th.setAttribute('scope', 'col');
+                th.appendChild(document.createTextNode(heads[i]));
+
+                tr.appendChild(th);
+            }
+
+            tableHead.appendChild(tr);
+
+            tableBody = document.getElementById('tableBody2');
+            tableBody.innerHTML = "";
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Min.'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['min']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Q1'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['quartiles']['Q1']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Mean'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['Mean']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Median'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['median']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Q3'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['quartiles']['Q3']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Max.'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['max']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Varians'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['variance']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 50px;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode('Standar') + '\n' + document.createTextNode('Deviasi'));
+            tr.appendChild(th);
+            for (var i = 0; i < heads.length; i++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'width: 150px;');
+                td.appendChild(document.createTextNode(stats[i]['sd']));
+
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
         }
     </script>
 </body>
