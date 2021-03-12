@@ -88,7 +88,6 @@ function setNewData(datas, heads) {
         for (var j = 0; j < datas[i].length; j++) {
             td = document.createElement('td');
             td.setAttribute('style', 'width: 150px; text-align: right;');
-            td.setAttribute('class', 'mr-5');
             td.appendChild(document.createTextNode(datas[i][j]));
 
             tr.appendChild(td);
@@ -133,7 +132,6 @@ function setNewHead(heads, tableHead, s) {
 
     th = document.createElement('th');
     th.setAttribute('style', 'width: 50px;');
-    th.setAttribute('class', 'border-left');
     th.setAttribute('scope', 'col');
     th.appendChild(document.createTextNode(s));
 
@@ -161,7 +159,6 @@ function setNewHasilBody(stats, tableBody, heads, s, t, u) {
     for (var i = 0; i < heads; i++) {
         td = document.createElement('td');
         td.setAttribute('style', 'width: 150px; text-align: right;');
-        td.setAttribute('class', 'mr-5');
 
         if (u == ""){
             n = +stats[i][t].toFixed(5);
