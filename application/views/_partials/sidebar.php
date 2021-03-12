@@ -27,7 +27,7 @@
                                         <ul class="list-group list-unstyled m-0">
                                             <li><a href="">ANOVA</a></li>
                                             <li><a href="">Averages</a></li>
-                                            <li><a href="">Circular</a></li>
+                                            <li><a href="<?= base_url("circulars") ?>">Circular</a></li>
                                             <li><a href="<?= base_url("deskriptif") ?>">Deskriptif</a></li>
                                             <li><a href="">Distance</a></li>
                                             <li><a href="">Distribusi</a></li>
