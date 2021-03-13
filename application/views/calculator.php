@@ -25,14 +25,18 @@
                                 <div class="col-md-12 mt-4" id="mainContainer">
                                     <!--标准型-->
                                     <div class="rounded standard-main" id="std-main">
-                                        <div class="title ml-3">
+                                        <div class="title ml-2">
                                             Kalkulator
                                         </div>
                                         <!--结果显示区域-->
-                                        <div class="result ml-3">
+                                        <div class="result ml-2">
                                             <!--显示类型信息-->
                                             <div class="type" id="std-show-bar">
                                                 ☰&nbsp;&nbsp;&nbsp;Standard
+                                            </div>
+                                            <!--上一步的结果-->
+                                            <div class="pre" id="std-pre-step">
+                                                &nbsp;
                                             </div>
                                             <!--第二个/运算结果-->
                                             <div class="second mr-3" id="std-show-input">0</div>
@@ -40,7 +44,7 @@
                                         <ul id="std-top-symbol">
                                             <li style="float: left; text-align: center; cursor: pointer;" value="17">%</li>
                                             <li style="float: left; text-align: center; cursor: pointer;" value="18">√</li>
-                                            <li style="float: left; text-align: center; cursor: pointer;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
+                                            <li style="height: 18px; float: left; text-align: center; cursor: pointer;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> /></li>
                                             <li style="float: left; text-align: center; cursor: pointer;" value="20"><img src=<?= base_url("assets/images/1_x.png") ?> /></li>
                                         </ul>
                                         <!--数字和符号-->
@@ -75,27 +79,31 @@
                                     </div>
                                     <!--科学型-->
                                     <div class="rounded science-main" id="sci-main">
-                                        <div class="title ml-3">
+                                        <div class="title ml-2">
                                             Kalkulator
                                         </div>
                                         <!--结果显示区域-->
-                                        <div class="sci-result ml-3">
+                                        <div class="sci-result ml-2">
                                             <!--显示类型信息-->
                                             <div class="type" id="sci-show-bar">
                                                 ☰&nbsp;&nbsp;&nbsp;Science
                                             </div>
+                                            <!--上一步的结果-->
+                                            <div class="pre" id="sci-pre-step">
+                                                &nbsp;
+                                            </div>
                                             <!--第二个/运算结果-->
-                                            <div class="second mr-3" id="sci-show-input">0</div>
+                                            <div class="second mr-2" id="sci-show-input">0</div>
                                         </div>
                                         <!--上面的3行运算符-->
                                         <ul id="sci-top-symbol">
                                             <li style="float: left; text-align: center;" value="21">(</li>
                                             <li style="float: left; text-align: center;" value="22">)</li>
-                                            <li style="float: left; text-align: center;" value="23"><img src=<?= base_url("assets/images/x_y_sqrt.png") ?> style="height: 18px;width: 22px;" /></li>
+                                            <li style="height: 18px; width: 22px; float: left; text-align: center;" value="23"><img src=<?= base_url("assets/images/x_y_sqrt.png") ?> /></li>
                                             <li style="float: left; text-align: center;" value="24">n!</li>
                                             <li style="float: left; text-align: center;" value="25">Exp</li>
-                                            <li style="float: left; text-align: center;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> style="height: 18px;" /></li>
-                                            <li style="float: left; text-align: center;" value="26"><img src=<?= base_url("assets/images/x_y.png") ?> style="height: 18px;" /></li>
+                                            <li style="height: 18px; float: left; text-align: center;" value="19"><img src=<?= base_url("assets/images/x_2.png") ?> /></li>
+                                            <li style="height: 18px; float: left; text-align: center;" value="26"><img src=<?= base_url("assets/images/x_y.png") ?> /></li>
                                             <li style="float: left; text-align: center;" value="27">sin</li>
                                             <li style="float: left; text-align: center;" value="28">cos</li>
                                             <li style="float: left; text-align: center;" value="29">tan</li>
@@ -142,17 +150,21 @@
                                     </div>
                                     <!--程序员型-->
                                     <div class="rounded programmer-main" id="pro-main">
-                                        <div class="title ml-3">
+                                        <div class="title ml-2">
                                             Kalkulator
                                         </div>
                                         <!--结果显示区域-->
-                                        <div class="pro-result ml-3">
+                                        <div class="pro-result ml-2">
                                             <!--显示类型信息-->
                                             <div class="type" id="pro-show-bar">
                                                 ☰&nbsp;&nbsp;&nbsp;Programmer
                                             </div>
+                                            <!--上一步的结果-->
+                                            <div class="pre" id="pro-pre-step">
+                                                &nbsp;
+                                            </div>
                                             <!--第二个/运算结果-->
-                                            <div class="second mr-3" id="pro-show-input">0</div>
+                                            <div class="second mr-2" id="pro-show-input">0</div>
                                             <!--显示16、10、8、2进制的值-->
                                             <div id="pro-scales">
                                                 <div scale="16">HEX&nbsp;&nbsp;&nbsp;<span>0</span></div>
