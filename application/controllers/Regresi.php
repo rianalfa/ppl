@@ -45,6 +45,7 @@ class Regresi extends CI_Controller {
 				'status' => 'error',
 				'msg' => $msg
 			)));
+			exit();
 		} else {
 			$object = $this->upload->data();
 			$namanya = "./assets/externals/{$object['file_name']}";

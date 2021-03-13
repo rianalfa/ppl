@@ -54,16 +54,20 @@
         request.open('POST', '<?= base_url('regresi/inputData') ?>', true);
         request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
-                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
-                    response = JSON.parse(request.responseText);
-                    if (response['status'] == 'success') {
-                        setNewData(response['datas'], response['x'], response['y']);
-                        setNewHasil(response);
-                    } else {
-                        swal('GAGAL!', response['msg'],'error');
-                    }
+                if (request.responseText == "undefined") {
+                    swal('GAGAL!', 'Gagal melakukan request.','error');
                 } else {
-                    alert(request.responseText);
+                    if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
+                        response = JSON.parse(request.responseText);
+                        if (response['status'] == 'success') {
+                            setNewData(response['datas'], response['x'], response['y']);
+                            setNewHasil(response);
+                        } else {
+                            swal('GAGAL!', response['msg'],'error');
+                        }
+                    } else {
+                        swal('GAGAL!', 'Gagal mengupload file.','error');
+                    }
                 }
             } else {
                 swal('GAGAL!', 'Gagal melakukan request.','error');
