@@ -56,11 +56,17 @@
             if (request.readyState == 4 && request.status == 200) {
                 if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                     response = JSON.parse(request.responseText);
-                    setNewData(response['datas'], response['x'], response['y']);
-                    setNewHasil(response);
+                    if (response['status'] == 'success') {
+                        setNewData(response['datas'], response['x'], response['y']);
+                        setNewHasil(response);
+                    } else {
+                        swal('GAGAL!', response['msg'],'error');
+                    }
                 } else {
-                    alert("BABI");
+                    swal('GAGAL!', 'Gagal mengupload file.','error');
                 }
+            } else {
+                swal('GAGAL!', 'Gagal melakukan request.','error');
             }
         }
         request.send(datanya);

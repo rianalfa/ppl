@@ -40,8 +40,11 @@ class Regresi extends CI_Controller {
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('uploadFile')) {
-			$status = "error";
             $msg = $this->upload->display_errors();
+			$this->output->set_content_type('application/json')->set_output(json_encode(array(
+				'status' => 'error',
+				'msg' => $msg
+			)));
 		} else {
 			$object = $this->upload->data();
 			$namanya = "./assets/externals/{$object['file_name']}";
@@ -72,6 +75,7 @@ class Regresi extends CI_Controller {
 		$regression = new Regression\Linear($datas);
 
 		$this->output->set_content_type('application/json')->set_output(json_encode(array(
+			'status' => 'success',
 			'x' => $x,
 			'y' => $y,
 			'datas' => $datas,
