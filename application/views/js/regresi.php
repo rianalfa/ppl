@@ -63,7 +63,7 @@
                         swal('GAGAL!', response['msg'],'error');
                     }
                 } else {
-                    swal('GAGAL!', 'Gagal mengupload file.','error');
+                    alert(request.responseText);
                 }
             } else {
                 swal('GAGAL!', 'Gagal melakukan request.','error');
