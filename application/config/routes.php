@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -58,3 +58,5 @@ $route['kalkulator'] = 'umum/kalkulator';
 $route['deskriptif'] = 'deskriptif';
 $route['regresi'] = 'regresi';
 $route['regresi/inputData'] = 'regresi/inputData';
+$route['distribusi'] = 'distribusi';
+$route['distribusi/inputData'] = 'distribusi/inputData';

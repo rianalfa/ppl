@@ -30,7 +30,7 @@
                                             <li><a href="<?= base_url("circulars") ?>">Circular</a></li>
                                             <li><a href="<?= base_url("deskriptif") ?>">Deskriptif</a></li>
                                             <li><a href="">Distance</a></li>
-                                            <li><a href="">Distribusi</a></li>
+                                            <li><a href="<?= base_url("distribusi") ?>">Distribusi Frekuensi</a></li>
                                             <li><a href="">Percobaan</a></li>
                                             <li><a href="">Korelasi</a></li>
                                             <li><a href="<?= base_url("outliers") ?>">Outlier</a></li>
