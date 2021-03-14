@@ -66,28 +66,28 @@ class Regresi extends CI_Controller {
 				$datas = array_values($datas);
 			}
 
+			unlink("./assets/externals/{$object['file_name']}");
+			$x = $datas[0][0];
+			$y = $datas[0][1];
+			unset($datas[0]);
+			$datas = array_values($datas);
+
+			$regression = new Regression\Linear($datas);
+
+			$this->output->set_content_type('application/json')->set_output(json_encode(array(
+				'status' => 'success',
+				'x' => $x,
+				'y' => $y,
+				'datas' => $datas,
+				'm' => $regression->getParameters()['m'],
+				'mse' => $regression->standardErrors()['m'],
+				'mt' => $regression->tValues()['m'],
+				'mp' => $regression->tProbability()['m'],
+				'r2' => $regression->r2(),
+				'fs' => $regression->fStatistic(),
+				'fp' => $regression->fProbability(),
+				'hasil' => $regression->getEquation()
+			)));
 		}
-		unlink("./assets/externals/{$object['file_name']}");
-		$x = $datas[0][0];
-		$y = $datas[0][1];
-		unset($datas[0]);
-        $datas = array_values($datas);
-
-		$regression = new Regression\Linear($datas);
-
-		$this->output->set_content_type('application/json')->set_output(json_encode(array(
-			'status' => 'success',
-			'x' => $x,
-			'y' => $y,
-			'datas' => $datas,
-			'm' => $regression->getParameters()['m'],
-			'mse' => $regression->standardErrors()['m'],
-			'mt' => $regression->tValues()['m'],
-			'mp' => $regression->tProbability()['m'],
-			'r2' => $regression->r2(),
-			'fs' => $regression->fStatistic(),
-			'fp' => $regression->fProbability(),
-			'hasil' => $regression->getEquation()
-		)));
 	}
 }

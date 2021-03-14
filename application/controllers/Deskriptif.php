@@ -40,8 +40,11 @@ class Deskriptif extends CI_Controller {
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('uploadFile')) {
-			$status = "error";
             $msg = $this->upload->display_errors();
+			$this->output->set_content_type('application/json')->set_output(json_encode(array(
+				'status' => 'error',
+				'msg' => $msg
+			)));
 		} else {
 			$object = $this->upload->data();
 			$namanya = "./assets/externals/{$object['file_name']}";
@@ -65,33 +68,30 @@ class Deskriptif extends CI_Controller {
 				}
 			}
 
+			unlink("./assets/externals/{$object['file_name']}");
+			$heads = $datas[0];
+			unset($datas[0]);
+			$datas = array_values($datas);
+
+			for ($i = 0; $i < sizeof($datass); $i++) {
+				$datass[$i] = array_slice($datass[$i], 1, sizeof($datass[$i]));
+			}
+			$datass = array_values($datass);
+
+			$stats = [];
+
+			for ($i = 0; $i < sizeof($datass); $i++) {
+				$stat = Descriptive::describe($datass[$i]);
+				array_push($stats, $stat);
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode(array(
+				'status' => 'success',
+				'heads' => $heads,
+				'datas' => $datas,
+				'datass' => $datass,
+				'stats' => $stats
+			)));
 		}
-		unlink("./assets/externals/{$object['file_name']}");
-		$heads = $datas[0];
-		unset($datas[0]);
-        $datas = array_values($datas);
-
-		$datass[0] = array_slice($datass[0], 1, sizeof($datass[0]));
-		$datass[1] = array_slice($datass[1], 1, sizeof($datass[1]));
-		$datass[2] = array_slice($datass[2], 1, sizeof($datass[2]));
-		$datass[3] = array_slice($datass[3], 1, sizeof($datass[3]));
-		$datass = array_values($datass);
-
-		$stats = [];
-		$stat = Descriptive::describe($datass[0]);
-		array_push($stats, $stat);
-		$stat = Descriptive::describe($datass[1]);
-		array_push($stats, $stat);
-		$stat = Descriptive::describe($datass[2]);
-		array_push($stats, $stat);
-		$stat = Descriptive::describe($datass[3]);
-		array_push($stats, $stat);
-
-		$this->output->set_content_type('application/json')->set_output(json_encode(array(
-			'heads' => $heads,
-			'datas' => $datas,
-			'datass' => $datass,
-			'stats' => $stats
-		)));
 	}
 }

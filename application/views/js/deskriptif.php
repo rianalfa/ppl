@@ -52,12 +52,20 @@ function inputData() {
 
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
-            if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
-                response = JSON.parse(request.responseText);
-                setNewData(response['datas'], response['heads']);
-                setNewHasil(response['stats'], response['heads']);
+            if (request.responseText == "undefined") {
+                    swal('GAGAL!', 'Server gagal merespon.','error');
             } else {
-                alert("BABI");
+                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
+                    response = JSON.parse(request.responseText);
+                    if (response['status'] == 'success') {
+                        setNewData(response['datas'], response['heads']);
+                        setNewHasil(response['stats'], response['heads']);
+                    } else {
+                        swal('GAGAL!', response['msg'],'error');
+                    }
+                } else {
+                    swal('GAGAL!', 'Gagal mengupload file.','error');
+                }
             }
         }
     }

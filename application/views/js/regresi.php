@@ -55,7 +55,7 @@
         request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
                 if (request.responseText == "undefined") {
-                    swal('GAGAL!', 'Gagal melakukan request.','error');
+                    swal('GAGAL!', 'Server gagal merespon.','error');
                 } else {
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         response = JSON.parse(request.responseText);
@@ -69,8 +69,6 @@
                         swal('GAGAL!', 'Gagal mengupload file.','error');
                     }
                 }
-            } else {
-                swal('GAGAL!', 'Gagal melakukan request.','error');
             }
         }
         request.send(datanya);
