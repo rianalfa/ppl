@@ -89,7 +89,7 @@ li img {
 
 .standard-main {
     width: 400px;
-    height: 497px;
+    height: 485px;
 }
 
 #std-top-symbol {
@@ -122,7 +122,7 @@ li img {
 .science-main {
     display: none;
     width: 400px;
-    height: 540px;
+    height: 527px;
 }
 
 .sci-result {
@@ -158,12 +158,12 @@ li img {
 
 .programmer-main {
     display: none;
-    height: 556px;
+    height: 570px;
     width: 400px;
 }
 
 .pro-result {
-    height: 200px;
+    height: 225px;
     text-align: right;
 }
 

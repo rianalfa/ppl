@@ -31,10 +31,10 @@ class Regresi extends CI_Controller {
 	public function inputData()
 	{
 		$config['upload_path'] = './assets/externals';
-		$config['allowed_types'] = 'xlsx|xls';
+		$config['allowed_types'] = '*';
 		$config['max_filename'] = '255';
         $config['encrypt_name'] = false;
-        $config['max_size'] = '5120';
+        $config['max_size'] = '5121';
         $config['overwrite'] = true;
 
 		$this->load->library('upload', $config);
@@ -47,47 +47,61 @@ class Regresi extends CI_Controller {
 			)));
 			exit();
 		} else {
-			$object = $this->upload->data();
-			$namanya = "./assets/externals/{$object['file_name']}";
-			$datas = [];
+			if (($this->upload->data('file_ext') == '.xlsx') || ($this->upload->data('file_ext') == '.xls')) {
+				if ($this->upload->data('file_size') <= '5120') {
+					$object = $this->upload->data();
+					$namanya = "./assets/externals/{$object['file_name']}";
+					$datas = [];
 
-			if ($filen = SimpleXLSX::parse($namanya)) {
-				$j = 0;
-				$i = 0;
-				foreach ($filen->rows() as $r => $row) {
-					foreach ($row as $c => $cell) {
-						$data[$i] = $cell;
-						$i++;
+					if ($filen = SimpleXLSX::parse($namanya)) {
+						$j = 0;
+						$i = 0;
+						foreach ($filen->rows() as $r => $row) {
+							foreach ($row as $c => $cell) {
+								$data[$i] = $cell;
+								$i++;
+							}
+							$i=0;
+							array_push($datas, $data);
+						}
+						
+						$datas = array_values($datas);
 					}
-					$i=0;
-					array_push($datas, $data);
+
+					unlink("./assets/externals/{$object['file_name']}");
+					$x = $datas[0][0];
+					$y = $datas[0][1];
+					unset($datas[0]);
+					$datas = array_values($datas);
+
+					$regression = new Regression\Linear($datas);
+
+					$this->output->set_content_type('application/json')->set_output(json_encode(array(
+						'status' => 'success',
+						'x' => $x,
+						'y' => $y,
+						'datas' => $datas,
+						'm' => $regression->getParameters()['m'],
+						'mse' => $regression->standardErrors()['m'],
+						'mt' => $regression->tValues()['m'],
+						'mp' => $regression->tProbability()['m'],
+						'r2' => $regression->r2(),
+						'fs' => $regression->fStatistic(),
+						'fp' => $regression->fProbability(),
+						'hasil' => $regression->getEquation()
+					)));
+				} else {
+					$this->output->set_content_type('application/json')->set_output(json_encode(array(
+						'status' => 'error',
+						'msg' => 'Ukuran file yang Anda unggah terlalu besar.'
+					)));
 				}
-				
-				$datas = array_values($datas);
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(array(
+					'status' => 'error',
+					'msg' => 'Tipe file yang Anda unggah salah.'
+				)));
 			}
-
-			unlink("./assets/externals/{$object['file_name']}");
-			$x = $datas[0][0];
-			$y = $datas[0][1];
-			unset($datas[0]);
-			$datas = array_values($datas);
-
-			$regression = new Regression\Linear($datas);
-
-			$this->output->set_content_type('application/json')->set_output(json_encode(array(
-				'status' => 'success',
-				'x' => $x,
-				'y' => $y,
-				'datas' => $datas,
-				'm' => $regression->getParameters()['m'],
-				'mse' => $regression->standardErrors()['m'],
-				'mt' => $regression->tValues()['m'],
-				'mp' => $regression->tProbability()['m'],
-				'r2' => $regression->r2(),
-				'fs' => $regression->fStatistic(),
-				'fp' => $regression->fProbability(),
-				'hasil' => $regression->getEquation()
-			)));
 		}
 	}
 }

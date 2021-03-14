@@ -54,8 +54,10 @@
         request.open('POST', '<?= base_url('regresi/inputData') ?>', true);
         request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
-                if (request.responseText == "undefined") {
+                if (request.responseText == "") {
                     swal('GAGAL!', 'Server gagal merespon.','error');
+                    document.getElementById('uploadFile').value = "";
+                    document.getElementById('tombolnya').hidden = true;
                 } else {
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         response = JSON.parse(request.responseText);
@@ -63,10 +65,14 @@
                             setNewData(response['datas'], response['x'], response['y']);
                             setNewHasil(response);
                         } else {
-                            swal('GAGAL!', response['msg'],'error');
+                            swal('GAGAL!', response['msg'], 'error');
+                            document.getElementById('uploadFile').value = "";
+                            document.getElementById('tombolnya').hidden = true;
                         }
                     } else {
-                        swal('GAGAL!', 'Gagal mengupload file.','error');
+                        swal('GAGAL!', request.responseText, 'error');
+                        document.getElementById('uploadFile').value = "";
+                        document.getElementById('tombolnya').hidden = true;
                     }
                 }
             }
