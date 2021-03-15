@@ -32,9 +32,9 @@
                                             <li><a href="">Distance</a></li>
                                             <li><a href="<?= base_url("distribusi") ?>">Distribusi Frekuensi</a></li>
                                             <li><a href="">Percobaan</a></li>
-                                            <li><a href="">Korelasi</a></li>
+                                            <li><a href="<?= base_url("korelasi") ?>">Korelasi</a></li>
                                             <li><a href="<?= base_url("outliers") ?>">Outlier</a></li>
-                                            <li><a href="">Variabel Acak</a></li>
+                                            <li><a href="<?= base_url("random") ?>">Peubah Acak</a></li>
                                             <li><a href="<?= base_url("regresi") ?>">Regresi Linier</a></li>
                                             <li><a href="">Uji Signifikansi</a></li>
                                         </ul>

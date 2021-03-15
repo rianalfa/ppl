@@ -60,3 +60,6 @@ $route['regresi'] = 'regresi';
 $route['regresi/inputData'] = 'regresi/inputData';
 $route['distribusi'] = 'distribusi';
 $route['distribusi/inputData'] = 'distribusi/inputData';
+$route['korelasi'] = 'korelasi';
+$route['korelasi/inputData'] = 'korelasi/inputData';
+$route['random'] = 'random';
