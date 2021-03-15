@@ -25,45 +25,9 @@ class Circulars extends CI_Controller {
 
 	public function index()
 	{
+		
 		$this->load->view('circular');
 	}
 
-	public function inputData()
-	{
-		$config['upload_path'] = './assets/externals';
-		$config['allowed_types'] = 'xlsx|xls';
-		$config['max_filename'] = '255';
-        $config['encrypt_name'] = false;
-        $config['max_size'] = '5120';
-        $config['overwrite'] = true;
-
-		$this->load->library('upload', $config);
-
-		if (!$this->upload->do_upload('uploadFile')) {
-			$status = "error";
-            $msg = $this->upload->display_errors();
-		} else {
-			$object = $this->upload->data();
-			$namanya = "./assets/externals/{$object['file_name']}";
-			$datas = [];
-
-			if ($filen = SimpleXLSX::parse($namanya)) {
-				$j = 0;
-				$i = 0;
-				foreach ($filen->rows() as $r => $row) {
-					foreach ($row as $c => $cell) {
-						$data[$i] = $cell;
-						$i++;
-					}
-					$i=0;
-					array_push($datas, $data);
-				}
-				
-				$datas = array_values($datas);
-			}
-
-		}
-		unlink("./assets/externals/{$object['file_name']}");
-		$this->output->set_content_type('application/json')->set_output(json_encode($datas));
-	}
+	
 }
