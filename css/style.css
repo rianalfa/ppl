@@ -273,9 +273,9 @@ main-tentang
     font-size: 16px;
     font-weight: 300;
     color: #000;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     text-align: justify;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     line-height: 25px;
 }
 

@@ -1,19 +1,14 @@
 <script>
-    function mulai() {
+    function twoway() {
         var main = document.getElementById('mainContainer');
         main.innerHTML = `
-            <div class="card">
-                <div class="col-md-12 mt-4">
-                    <form>
-                        <div class="mb-3">
-                            <label for="inputData" class="form-label">Silahkan memasukkan nilai data</label>
-                            <input type="text" class="form-control" id="inputData" placeholder="Contoh: 33, 96, 45, 22, 34, 12, ..." aria-describedby="inputHelp">
-                            <div id="inputHelp" class="form-text">Nilai data dapat dipisahkan dengan koma, jeda baris, atau spasi. Lalu klik tombol "Hitung".</div>
-                        </div>
-                        <div class="d-flex justify-content-left">
-                            <button class="btn btn-secondary ml-2 mb-2" onclick="hitung();">Hitung</button>
-                        </div>
-                    </form>
+            <div class="card mb-2 rounded">
+                <label class="ml-3 mt-2" for="uploadFile">
+                    Silahkan unggah file data yang akan dianalisa (File berekstensi 'xlsx' atau 'xls'). Lalu klik tombol "Analisa".
+                </label>
+                <div class="d-flex justify-content-between">
+                    <input type="file" class="form-control-file w-50 p-2 ml-1" id="uploadFile" name="uploadFile" value="" required/>
+                    <button id="tombolnya" onclick="inputData();" class="btn btn-sm btn-secondary w-25 mr-2 mb-2" hidden>Analisa</button>
                 </div>
             </div>
             <div class="row">

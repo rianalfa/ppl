@@ -63,3 +63,4 @@ $route['distribusi/inputData'] = 'distribusi/inputData';
 $route['korelasi'] = 'korelasi';
 $route['korelasi/inputData'] = 'korelasi/inputData';
 $route['random'] = 'random';
+$route['anova'] = 'anovas';
