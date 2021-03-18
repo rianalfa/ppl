@@ -1,4 +1,4 @@
-<footer class="footer mb-0">
+<footer class="footer mb-0" style="position: flow; flow: right; bottom: 0 !important; z-index:0 !important;">
     <div class="container-fluid">
         <div class="row text-muted">
             <div class="col-6 text-left">

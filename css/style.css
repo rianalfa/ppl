@@ -273,9 +273,9 @@ main-tentang
     font-size: 16px;
     font-weight: 300;
     color: #000;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     text-align: justify;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     line-height: 25px;
 }
 
@@ -290,9 +290,9 @@ main-tentang
 ----------------------*/
 
 footer {
-    bottom: 0 !important;
-    z-index: 0 !important;
+    bottom: 0;
     width: 100%;
+    position: fixed;
 }
 
 footer.footer {
@@ -323,6 +323,7 @@ footer
 
 div#mainContainer {
     display: block;
+    overflow-y: auto;
     height: 550px;
 }
 
@@ -337,13 +338,12 @@ table tbody {
 }
 
 table thead {
-    position: sticky;
-    top: 0;
+    position:sticky;
+    top: 0 ;
     background-color: #fff;
 }
-
-table thead,
-table tbody tr {
+  
+table thead, table tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
