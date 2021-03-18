@@ -122,7 +122,7 @@ function setNewHasil(averages, heads) {
 
     setNewHasilBody(averages, tableBody, heads.length, 'Median', 'median', '');
 	
-	setNewHasilBody(averages, tableBody, heads.length, 'Mode', 'mode', '');
+	setNewHasilBody(averages, tableBody, heads.length, 'Mode', 'mode', '0');
 	
 	setNewHasilBody(averages, tableBody, heads.length, 'Rata-Rata Geometrik', 'geometric_mean', '');
 	

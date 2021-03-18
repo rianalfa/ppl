@@ -54,14 +54,22 @@ $route['default_controller'] = 'umum';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['kalkulator'] = 'umum/kalkulator';
+$route['anova'] = 'anovas';
+
+$route['averages'] = 'averages';
+
 $route['deskriptif'] = 'deskriptif';
-$route['regresi'] = 'regresi';
-$route['regresi/inputData'] = 'regresi/inputData';
+$route['deskriptif/inputData'] = 'deskriptif/inputData';
+
 $route['distribusi'] = 'distribusi';
 $route['distribusi/inputData'] = 'distribusi/inputData';
+
+$route['kalkulator'] = 'umum/kalkulator';
+
 $route['korelasi'] = 'korelasi';
 $route['korelasi/inputData'] = 'korelasi/inputData';
+
 $route['random'] = 'random';
-$route['anova'] = 'anovas';
-$route['average'] = 'average';
+
+$route['regresi'] = 'regresi';
+$route['regresi/inputData'] = 'regresi/inputData';

@@ -13,7 +13,7 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="toggled">
-            <div id="content" style="height: 700px;">
+            <div id="content">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
                     <!-- Navbar -->
