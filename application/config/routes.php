@@ -64,3 +64,4 @@ $route['korelasi'] = 'korelasi';
 $route['korelasi/inputData'] = 'korelasi/inputData';
 $route['random'] = 'random';
 $route['anova'] = 'anovas';
+$route['average'] = 'average';
