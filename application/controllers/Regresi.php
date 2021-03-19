@@ -69,8 +69,8 @@ class Regresi extends CI_Controller {
 					}
 
 					unlink("./assets/externals/{$object['file_name']}");
-					$x = $datas[0][0];
-					$y = $datas[0][1];
+					$heads[0] = $datas[0][0];
+					$heads[1] = $datas[0][1];
 					unset($datas[0]);
 					$datas = array_values($datas);
 
@@ -78,9 +78,7 @@ class Regresi extends CI_Controller {
 
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
 						'status' => 'success',
-						'x' => $x,
-						'y' => $y,
-						'datas' => $datas,
+						'heads' => $heads,
 						'm' => $regression->getParameters()['m'],
 						'mse' => $regression->standardErrors()['m'],
 						'mt' => $regression->tValues()['m'],

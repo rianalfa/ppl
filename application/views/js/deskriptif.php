@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 <script>
 function gettingStarted() {
     var main = document.getElementById('mainContainer');
@@ -32,8 +35,8 @@ function gettingStarted() {
     `;
 
     filenya = document.getElementById('uploadFile');
-    filenya.addEventListener('change', function(e) {
-        if (filenya.value == "") {
+    filenya.addEventListener('change', function(evt){
+        if (evt.value == "") {
             document.getElementById("tombolnya").hidden = true;
         } else {
             document.getElementById("tombolnya").hidden = false;
@@ -41,37 +44,32 @@ function gettingStarted() {
     });
 }
 
-function inputData() {
-    filenya = document.getElementById('uploadFile');
-    var file = filenya.files[0];
-    var datanya = new FormData();
+var setData = function(heads) {
 
-    datanya.append("uploadFile", file);
-    request = new XMLHttpRequest();
-    request.open('POST', '<?= base_url('deskriptif/inputData') ?>', true);
+    this.parseExcel = function(file) {
+        var reader = new FileReader();
 
-    request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-            if (request.responseText == "undefined") {
-                    swal('GAGAL!', 'Server gagal merespon.','error');
-            } else {
-                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
-                    response = JSON.parse(request.responseText);
-                    if (response['status'] == 'success') {
-                        setNewData(response['datas'], response['heads']);
-                        setNewHasil(response['stats'], response['heads']);
-                    } else {
-                        swal('GAGAL!', response['msg'],'error');
-                    }
-                } else {
-                    swal('GAGAL!', 'Gagal mengupload file.','error');
-                }
-            }
-        }
-    }
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {
+            type: 'binary'
+            });
+            workbook.SheetNames.forEach(function(sheetName) {
+            // Here is your object
+            var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+            var json_object = JSON.stringify(XL_row_object);
 
-    request.send(datanya);
-}
+            setNewData(JSON.parse(json_object), heads);
+            })
+        };
+
+        reader.onerror = function(ex) {
+            alert(ex);
+        };
+
+        reader.readAsBinaryString(file);
+    };
+};
 
 function setNewData(datas, heads) {
     document.getElementById('tableData').hidden = false;
@@ -93,10 +91,14 @@ function setNewData(datas, heads) {
 
         tr.appendChild(th);
 
-        for (var j = 0; j < datas[i].length; j++) {
+        for (var j = 0; j < heads.length; j++) {
             td = document.createElement('td');
             td.setAttribute('style', 'width: 150px; text-align: right;');
-            td.appendChild(document.createTextNode(datas[i][j]));
+            if (datas[i].hasOwnProperty(heads[j])) {
+                td.appendChild(document.createTextNode(datas[i][heads[j]]));
+            } else {
+                td.appendChild(document.createTextNode(""));
+            }
 
             tr.appendChild(td);
         }
@@ -106,6 +108,40 @@ function setNewData(datas, heads) {
 
     document.getElementById('uploadFile').value = "";
     document.getElementById('tombolnya').hidden = true;
+}
+
+function inputData() {
+    filenya = document.getElementById('uploadFile');
+    var file = filenya.files[0];
+    var datanya = new FormData();
+
+    datanya.append("uploadFile", file);
+    request = new XMLHttpRequest();
+    request.open('POST', '<?= base_url('deskriptif/inputData') ?>', true);
+
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            if (request.responseText == "undefined") {
+                    swal('GAGAL!', 'Server gagal merespon.','error');
+            } else {
+                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
+                    response = JSON.parse(request.responseText);
+                    if (response['status'] == 'success') {
+                        var readExcel = new setData(response['heads']);
+                        readExcel.parseExcel(file);
+                        
+                        setNewHasil(response['stats'], response['heads']);
+                    } else {
+                        swal('GAGAL!', response['msg'],'error');
+                    }
+                } else {
+                    swal('GAGAL!', 'Gagal mengupload file.','error');
+                }
+            }
+        }
+    }
+
+    request.send(datanya);
 }
 
 function setNewHasil(stats, heads) {

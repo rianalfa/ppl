@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 <script>    
     function gettingStarted() {
         var main = document.getElementById('mainContainer');
@@ -45,6 +48,33 @@
         });
     }
 
+    var setData = function(heads) {
+
+        this.parseExcel = function(file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, {
+                type: 'binary'
+                });
+                workbook.SheetNames.forEach(function(sheetName) {
+                // Here is your object
+                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                var json_object = JSON.stringify(XL_row_object);
+
+                setNewData(JSON.parse(json_object), heads);
+                })
+            };
+
+            reader.onerror = function(ex) {
+                alert(ex);
+            };
+
+            reader.readAsBinaryString(file);
+        };
+    };
+
     function inputData() {
         filenya = document.getElementById('uploadFile');
         var file = filenya.files[0];
@@ -62,7 +92,9 @@
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         response = JSON.parse(request.responseText);
                         if (response['status'] == 'success') {
-                            setNewData(response['datas'], response['x'], response['y']);
+                            var readExcel = new setData(response['heads']);
+                            readExcel.parseExcel(file);
+
                             setNewHasil(response);
                         } else {
                             swal('GAGAL!', response['msg'], 'error');
@@ -80,28 +112,65 @@
         request.send(datanya);
     }
 
-    function setNewData(datas, x, y) {
-        document.getElementById('tableData').hidden=false;
-        document.getElementById('tableHead').innerHTML=`
-            <tr>
-                <th style="width:75px; text-align: center;" scope="col">No.</th>
-                <th style="text-align: center;"scope="col">` + x + `</th>
-                <th style="text-align: center;"scope="col">` + y + `</th>
-            </tr>
-        `;
+    function setNewData(datas, heads) {
+        document.getElementById('tableData').hidden = false;
+        tableHead = document.getElementById('tableHead');
+        tableHead.innerHTML = "";
+
+        setNewHead(heads, tableHead, 'No.');
+
         tableBody = document.getElementById('tableBody');
         tableBody.innerHTML = "";
+
         for (var i = 0; i < datas.length; i++) {
-            tableBody.innerHTML += `
-                <tr>
-                    <th style="width:75px;" scope="row">` + (i+1) + `</th>
-                    <td style="text-align: right;">` + datas[i][0] + `</td>
-                    <td style="text-align: right;">` + datas[i][1] + `</td>
-                </tr>
-            `;
+            tr = document.createElement('tr');
+
+            th = document.createElement('th');
+            th.setAttribute('style', 'width: 75px;');
+            th.setAttribute('scope', 'row');
+            th.appendChild(document.createTextNode(i+1));
+
+            tr.appendChild(th);
+
+            for (var j = 0; j < heads.length; j++) {
+                td = document.createElement('td');
+                td.setAttribute('style', 'text-align: right;');
+                if (datas[i].hasOwnProperty(heads[j])) {
+                    td.appendChild(document.createTextNode(datas[i][heads[j]]));
+                } else {
+                    td.appendChild(document.createTextNode(""));
+                }
+
+                tr.appendChild(td);
+            }
+            
+            tableBody.appendChild(tr);
         }
+
         document.getElementById('uploadFile').value = "";
         document.getElementById('tombolnya').hidden = true;
+    }
+
+    function setNewHead(heads, tableHead, s) {
+        tr = document.createElement('tr');
+
+        th = document.createElement('th');
+        th.setAttribute('style', 'width: 75px;');
+        th.setAttribute('scope', 'col');
+        th.appendChild(document.createTextNode(s));
+
+        tr.appendChild(th);
+
+        for (var i = 0; i < heads.length; i++) {
+            th = document.createElement('th');
+            th.setAttribute('style', 'text-align: center;');
+            th.setAttribute('scope', 'col');
+            th.appendChild(document.createTextNode(heads[i]));
+
+            tr.appendChild(th);
+        }
+
+        tableHead.appendChild(tr);
     }
 
     function setNewHasil(hasils) {
