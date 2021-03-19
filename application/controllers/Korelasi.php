@@ -53,7 +53,7 @@ class Korelasi extends CI_Controller {
 					$namanya = "./assets/externals/{$object['file_name']}";
 					$datas = [];
 
-			if ($filen = SimpleXLSX::parse($namanya)) {
+					if ($filen = SimpleXLSX::parse($namanya)) {
 						$j = 0;
 						$i = 0;
 						foreach ($filen->rows() as $r => $row) {
@@ -67,25 +67,26 @@ class Korelasi extends CI_Controller {
 						
 						$datas = array_values($datas);
 					}
-		unlink("./assets/externals/{$object['file_name']}");
-		$x = $datas[0][0];
-		$y = $datas[0][1];
-		unset($datas[0]);
-        $datas = array_values($datas);
 
-		//$r = Correlation::r($x, $y);
-		$stats = Correlation::describe($x, $y);
+					unlink("./assets/externals/{$object['file_name']}");
+					$x = $datas[0][0];
+					$y = $datas[0][1];
+					unset($datas[0]);
+        			$datas = array_values($datas);
 
-		$this->output->set_content_type('application/json')->set_output(json_encode(array(
-			'status' => 'success',
-			'x' => $x,
-			'y' => $y,
-			'datas' => $datas,
-			//'r' => $r
-			'cov' => $stats['cov']
+					//$r = Correlation::r($x, $y);
+					$stats = Correlation::describe($x, $y);
+
+					$this->output->set_content_type('application/json')->set_output(json_encode(array(
+						'status' => 'success',
+						'x' => $x,
+						'y' => $y,
+						'datas' => $datas,
+						//'r' => $r
+						'cov' => $stats['cov']
 			
-		)));
-		} else {
+					)));
+				} else {
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
 						'status' => 'error',
 						'msg' => 'Ukuran file yang Anda unggah terlalu besar.'
@@ -99,5 +100,4 @@ class Korelasi extends CI_Controller {
 			}
 		}
 	}
-}	
-
+}
