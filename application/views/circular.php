@@ -20,10 +20,15 @@
                     <?php $this->load->view('_partials/navbar'); ?>
 
                     <!-- Begin Page Content -->
-					<div class="container-fluid px-lg-4">
+                    <div class="container-fluid px-lg-4">
                         <div class="row">
                             <div class="col-md-12 mt-lg-4 mt-4">
-
+                                <!-- Page Heading -->
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 class="h3 mb-0 text-gray-800">Circular</h1>
+                                </div>
+                                <div class="col-md-12 mt-4" id="mainContainer">
+                                    <div class="card mb-2">
 					<?php
 					// define variables and set to empty values
 					$nameErr  = "";
@@ -55,9 +60,6 @@
 
 					// Descriptive circular statistics report
 					$stats = Circular::describe($angles);
-					
-					
-					
 					  }
 					  
 					  
@@ -71,33 +73,42 @@
 					}
 					?>
 
-					<h2>Statistic Circular</h2>
-					<p>Isi dengan sudut-sudut dengan pemisah spasi, example: 1.2 0.93 1.1</p>
+					
+					<h5> Merupakan perhitungan statistik dengan variabel yang mengindikasikan sebuah arah atau siklus waktu.Ciri cirinya adalah ketika awal
+						dan akhir dari 	skala yang diukur akan bertemu 
+					</h5>
+					<br>
+					<h5>Isi dengan sudut-sudut dengan pemisah spasi, example: 1.2 0.93 1.1</h5>
 					<form method="post" action="">  
-					  Sudut : <input type="text" name="name" value="<?php echo $name;?>">
+					  <h5>Sudut : <input type="text" name="name" value="<?php echo $name;?>"></h5>
 					  <br><br>
+					  <div class="d-flex justify-content-left">
 					  <input type="submit" name="submit" value="Submit" >  
+					  </div>
 					</form>
+					</div>
+					
+					<div class="card mb-2">
 					<?php
-					echo "<br>";
-					echo "<h4>Hasil Kalkulasi : </h4>";
-					echo "<p>Mean : $θ</p>";
-					echo "<p>Resultant Length : $R </p>";
-					echo "<p>Mean Resultant Length : $ρ</p>";
-					echo "<p>Variance : $V</p>";
-					echo "<p>standardDeviation : $ν</p>";
+					echo "<h5>Hasil Kalkulasi : </h5>";
+					echo "<h5>Mean : $θ</h5>";
+					echo "<h5>Resultant Length : $R </h5>";
+					echo "<h5>Mean Resultant Length : $ρ</h5>";
+					echo "<h5>Variance : $V</h5>";
+					echo "<h5>standard Deviation : $ν</h5>";
 					?>
+					</div>
 
-
-					
-					
-					
-                <!-- Footer -->
-                <?php $this->load->view('_partials/footer'); ?>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+					
+					
+                <!-- Footer -->
+                <?php $this->load->view('_partials/footer'); ?>
+								
 			</div>
 		</div>
 </div>
