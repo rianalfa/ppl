@@ -20,9 +20,14 @@
                     <?php $this->load->view('_partials/navbar'); ?>
 
                     <!-- Begin Page Content -->
-					<div class="container-fluid px-lg-4">
+                    <div class="container-fluid px-lg-4">
                         <div class="row">
                             <div class="col-md-12 mt-lg-4 mt-4">
+                                <!-- Page Heading -->
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 class="h3 mb-0 text-gray-800">Outlier</h1>
+                                </div>
+                                <div class="col-md-12 mt-4" id="mainContainer">
 
 					<?php
 					// define variables and set to empty values
@@ -58,16 +63,16 @@
 					$n    = $jumlah;    // size of data
 					$𝛼    = $alpha; // significance level
 					
-					$grubbsStatistic = Outlier::grubbsStatistic($data, Outlier::TWO_SIDED);
-					$criticalValue   = Outlier::grubbsCriticalValue((float) $𝛼,(float) $n, Outlier::TWO_SIDED);
+					$grubbsStatistic1 = Outlier::grubbsStatistic($data, Outlier::TWO_SIDED);
+					$criticalValue1   = Outlier::grubbsCriticalValue((float) $𝛼,(float) $n, Outlier::TWO_SIDED);
 
 					// Grubbs' test - one sided test of minimum value
-					$grubbsStatistic = Outlier::grubbsStatistic($data, Outlier::ONE_SIDED_LOWER);
-					$criticalValue   = Outlier::grubbsCriticalValue($𝛼, $n, Outlier::ONE_SIDED);
+					$grubbsStatistic2 = Outlier::grubbsStatistic($data, Outlier::ONE_SIDED_LOWER);
+					$criticalValue2   = Outlier::grubbsCriticalValue((float) $𝛼,(float) $n, Outlier::ONE_SIDED);
 
 					// Grubbs' test - one sided test of maximum value
-					$grubbsStatistic = Outlier::grubbsStatistic($data, Outlier::ONE_SIDED_UPPER);
-					$criticalValue   = Outlier::grubbsCriticalValue($𝛼, $n, Outlier::ONE_SIDED);
+					$grubbsStatistic3 = Outlier::grubbsStatistic($data, Outlier::ONE_SIDED_UPPER);
+					$criticalValue3   = Outlier::grubbsCriticalValue((float) $𝛼,(float) $n, Outlier::ONE_SIDED);
 					// Descriptive circular statistics report
 					//$stats = Circular::describe($angles);
 					  }
@@ -81,34 +86,43 @@
 					  return $data;
 					}
 					?>
-
-					<h2>Statistic Outlier</h2>
-					<p>Isi dengan nilai-nilai dengan pemisah spasi, example: 199.31 199.53 200.19 200.82 201.92 201.95 202.18 245.57</p>
-					<p>	n    = 8 </p>
-					<p>	𝛼    = 0.05 </p>
+					<div class="card mb-2">
+					<h5>Outlier atau pencilan adalah titik data yang berbeda secara signifikan dari pengamatan lain</h5>
+					<h5>Isi dengan nilai-nilai dengan pemisah spasi ( ), contoh isian: </h5>
+					<h5>	data = 199.31 199.53 200.19 200.82 201.92 201.95 202.18 245.57</h5>
+					<h5>	n    = 8 </h5>
+					<h5>	𝛼    = 0.05 </h5>
 					<form method="post" action="">  
-					  Data : <input type="text" name="name" value="<?php echo $name;?>">
+					  <h5>Data : <input type="text" name="name" value="<?php echo $name;?>"></h5>
 					  <span class="error"> <?php echo $nameErr;?></span>
-					  <br><br>
-					  n : <input type="text" name="jumlah" value="<?php echo $jumlah;?>">
+					  
+					  <h5>n : <input type="text" name="jumlah" value="<?php echo $jumlah;?>"></h5>
 					  <span class="error"> <?php echo $nameErr;?></span>
-					  <br><br>
-					  𝛼 : <input type="text" name="alpha" value="<?php echo $alpha;?>">
+					  
+					  <h5>𝛼 : <input type="text" name="alpha" value="<?php echo $alpha;?>"></h5>
 					  <span class="error"> <?php echo $nameErr;?></span>
-					  <br><br>
+					  
 					  <input type="submit" name="submit" value="Submit">  
 					</form>
-					<?php
-					
-					?>
-					
+					</div>
+					<div class="card mb-2">
 					<?php
 					echo "<br>";
 					echo "<h4>Hasil Kalkulasi : </h4>";
-					echo "<p>Grubb's test - two sided test : $grubbsStatistic </p>";
-					echo "<p>Critical Value : $criticalValue</p>";
+					echo "<h5>Grubb's test - two sided test : $grubbsStatistic1 </h5>";
+					echo "<h5>Critical Value - two sided test  : $criticalValue1</h5>";
+					echo "<h5>Grubb's test - one sided test of minimum value : $grubbsStatistic2 </h5>";
+					echo "<h5>Critical Value - one sided test of minimum value : $criticalValue2</h5>";
+					echo "<h5>Grubb's test -one sided test of maximum value : $grubbsStatistic3 </h5>";
+					echo "<h5>Critical Value -one sided test of maximum value : $criticalValue3</h5>";
+					
 					?>
-
+					</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 					
 					
@@ -116,11 +130,9 @@
                 <!-- Footer -->
                 <?php $this->load->view('_partials/footer'); ?>
 
-            </div>
-        </div>
-		 </div>
-        </div>
-		 </div>
+					</div>
+				
+			
         
         <!-- /#page-content-wrapper -->
     </div>
