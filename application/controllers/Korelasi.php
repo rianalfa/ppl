@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'vendor/autoload.php';
 require_once 'HTTP/Request2.php';
 use MathPHP\Statistics\Correlation;
 
@@ -41,38 +40,64 @@ class Korelasi extends CI_Controller {
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('uploadFile')) {
-			$status = "error";
-            $msg = $this->upload->display_errors();
+			$msg = $this->upload->display_errors();
+			$this->output->set_content_type('application/json')->set_output(json_encode(array(
+				'status' => 'error',
+				'msg' => $msg
+			)));
+			exit();
 		} else {
-			$object = $this->upload->data();
-			$namanya = "./assets/externals/{$object['file_name']}";
-			$datas = [];
+			if (($this->upload->data('file_ext') == '.xlsx') || ($this->upload->data('file_ext') == '.xls')) {
+				if ($this->upload->data('file_size') <= '5120') {
+					$object = $this->upload->data();
+					$namanya = "./assets/externals/{$object['file_name']}";
+					$datas = [];
 
 			if ($filen = SimpleXLSX::parse($namanya)) {
-				$j = 0;
-				$i = 0;
-				foreach ($filen->rows() as $r => $row) {
-					foreach ($row as $c => $cell) {
-						$data[$i] = $cell;
-						$i++;
+						$j = 0;
+						$i = 0;
+						foreach ($filen->rows() as $r => $row) {
+							foreach ($row as $c => $cell) {
+								$data[$i] = $cell;
+								$i++;
+							}
+							$i=0;
+							array_push($datas, $data);
+						}
+						
+						$datas = array_values($datas);
 					}
-					$i=0;
-					array_push($datas, $data);
-				}
-				
-				$datas = array_values($datas);
-			}
-
-		}
 		unlink("./assets/externals/{$object['file_name']}");
 		$x = $datas[0][0];
 		$y = $datas[0][1];
 		unset($datas[0]);
         $datas = array_values($datas);
 
+		//$r = Correlation::r($x, $y);
+		$stats = Correlation::describe($x, $y);
+
 		$this->output->set_content_type('application/json')->set_output(json_encode(array(
+			'status' => 'success',
+			'x' => $x,
+			'y' => $y,
+			'datas' => $datas,
+			//'r' => $r
+			'cov' => $stats['cov']
 			
 		)));
+		} else {
+					$this->output->set_content_type('application/json')->set_output(json_encode(array(
+						'status' => 'error',
+						'msg' => 'Ukuran file yang Anda unggah terlalu besar.'
+					)));
+				}
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(array(
+					'status' => 'error',
+					'msg' => 'Tipe file yang Anda unggah salah.'
+				)));
+			}
+		}
 	}
-}
+}	
 
