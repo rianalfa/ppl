@@ -25,7 +25,8 @@ class Outliers extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('outlier');
+		$data['title'] = 'Outlier';
+		$this->load->view('outlier',$data);
 	}
 
 }
