@@ -25,8 +25,8 @@ class Circulars extends CI_Controller {
 
 	public function index()
 	{
-		
-		$this->load->view('circular');
+		$data['title'] = 'Circular';
+		$this->load->view('circular',$data);
 	}
 
 	

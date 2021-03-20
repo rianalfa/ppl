@@ -12,7 +12,7 @@
         <?php $this->load->view('_partials/sidebar'); ?>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" class="toggled">
             <div id="content">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
@@ -35,8 +35,12 @@
 					$nameErr = $emailErr = $genderErr = $websiteErr = "";
 					$email = $gender = $comment = $website = "";
 					$data =$jumlah=$alpha=$name= "";
-					$grubbsStatistic=0;
-					$criticalValue=0;
+					$grubbsStatistic1=0;
+					$criticalValue1=0;
+					$grubbsStatistic2=0;
+					$criticalValue2=0;
+					$grubbsStatistic3=0;
+					$criticalValue3=0;
 					$data = [199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57];
 					$n    = 8;    // size of data
 					$𝛼    = 0.05; // significance level

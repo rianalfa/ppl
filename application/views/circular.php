@@ -12,7 +12,7 @@
         <?php $this->load->view('_partials/sidebar'); ?>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" class="toggled">
             <div id="content">
                 <div class="container-fluid p-0 px-lg-0 px-md-0">
 
@@ -124,5 +124,6 @@
 
         });
 	</script>
+	
 </body>
 </html>
