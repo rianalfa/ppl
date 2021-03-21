@@ -1,11 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'vendor/autoload.php';
-require_once 'HTTP/Request2.php';
-use MathPHP\Statistics\Outlier;
+use MathPHP\Statistics\RandomVariable;
 
-class Outliers extends CI_Controller {
+class Random extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -22,11 +20,12 @@ class Outliers extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-
 	public function index()
 	{
-		$data['title'] = 'Outlier';
-		$this->load->view('outlier',$data);
+		$data['title'] = 'Peubah Acak';
+		$this->load->view('random', $data);
+
 	}
 
+	
 }

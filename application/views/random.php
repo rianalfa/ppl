@@ -25,20 +25,17 @@
                             <div class="col-md-12 mt-lg-4 mt-4">
                                 <!-- Page Heading -->
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 class="h3 mb-0 text-gray-800">Tentang</h1>
+                                    <h1 class="h3 mb-0 text-gray-800">Peubah Acak</h1>
                                 </div>
                                 <div class="col-md-12 mt-4" id="mainContainer">
-                                    <div class="card">
+                                    <div class="card mb-2">
                                         <h5>
-                                            Kalkulator Statistik Portabel merupakan aplikasi berbasis web yang berfungsi untuk menghitung angka secara umum dan menyediakan
-											alat perhitungan fungsi-fungsi statistik terhadap suatu data.
-											
+                                            Variabel Acah atau Peubah Acak adalah variabel numerik yang nilai spesifiknya tidak dapat diprediksi dengan pasti sebelum dilakukan eksperimen. 
+                                            Suatu peubah acak didefinisikan sebagai fungsi yang memetakan suatu kejadian pada sesuatu interval bilangan riil. 
                                         </h5>
-                                        <h5>
-                                            Kalkulator untuk menghitung angka sendiri terdapat 3 mode yaitu kalkulator standar, science, dan programmer yang digunakan sesuai 
-											kebutuhan. Kemudian terdapat berbagai macam alat perhitungan statistik seperti, regresi linier, korelasi, statistik deskriptif,
-											uji signifikansi, ANOVA, dll.
-                                        </h5>
+                                        <div class="d-flex justify-content-left">
+                                            <button class="btn btn-secondary ml-2 mb-2" onclick="gettingStarted();">Getting Started</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +60,10 @@
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
         });
+        
     </script>
+    <?php $this->load->view('js/random'); ?>
 </body>
 
 </html>
+
