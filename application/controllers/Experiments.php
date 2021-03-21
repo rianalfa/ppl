@@ -70,13 +70,13 @@ class Experiments extends CI_Controller {
 
 					unlink("./assets/externals/{$object['file_name']}");
 					$a = $datas[1][1];
-					$b = $datas[2][1];
-					$c = $datas[1][2];
+					$b = $datas[1][2];
+					$c = $datas[2][1];
 					$d = $datas[2][2];
 					unset($datas[0]);
 					$datas = array_values($datas);
 
-					$experiment = new Experiment($datas[1][1],$datas[2][1],$datas[1][2],$datas[2][2]);
+					$experiment = new Experiment($a, $b, $c, $d);
 
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
 						'status' => 'success',
@@ -85,7 +85,9 @@ class Experiments extends CI_Controller {
 						'c' => $c,
 						'd' => $d,
 						'datas' => $datas,
-						'rr' => $experiment->riskRatio()
+						'rr' => $experiment->riskRatio($a, $b, $c, $d),
+						'or' => $experiment->oddsRatio($a, $b, $c, $d),
+						'll' => $experiment->likelihoodRatio($a, $b, $c, $d)
 					)));
 				} else {
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
