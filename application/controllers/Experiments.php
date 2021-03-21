@@ -76,7 +76,7 @@ class Experiments extends CI_Controller {
 					unset($datas[0]);
 					$datas = array_values($datas);
 
-					$experiment = new Experiment($datas);
+					$experiment = new Experiment($datas[1][1],$datas[2][1],$datas[1][2],$datas[2][2]);
 
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
 						'status' => 'success',
