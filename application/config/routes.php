@@ -58,6 +58,8 @@ $route['anova'] = 'anovas';
 
 $route['averages'] = 'averages';
 
+$route['experiments'] = 'experiments';
+
 $route['deskriptif'] = 'deskriptif';
 $route['deskriptif/inputData'] = 'deskriptif/inputData';
 
