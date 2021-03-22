@@ -31,12 +31,12 @@
                                     <div class="card">
                                         <h5>
                                             Eksperiment atau Percobaan adalah penghitungan di statistik yang bertujuan untuk mencoba metode yang ada di statistik.
-											Pada Eksperiment ini akan ada Risk Ratio, Odds Ratio dan Likelihood Ratio. Risk Ratio adalah 
-											rasio probabilitas dari suatu hasil dalam kelompok terkena probabilitas suatu hasil dalam kelompok tidak terpapar. 
-											Bersama-sama dengan perbedaan risiko dan rasio peluang , risiko relatif mengukur hubungan antara eksposur dan hasil.
-											Odds Ratio adalah ukuran asosiasi paparan (faktor risiko) dengan kejadian penyakit; dihitung dari angka kejadian penyakit 
-											pada kelompok berisiko (terpapar faktor risiko) dibanding angka kejadian penyakit pada kelompok yang tidak berisiko (tidak terpapar faktor risiko).
-											Likelihood Ratio adalah salah satu uji yang berhubungan langsungdengan penduga maksimum likelihood, di mana model distribusi dari populasinyamengikuti model distribusi dengan pdf tertentu
+											Pada Eksperiment ini akan ada Risk Ratio, Odds Ratio dan Likelihood Ratio. </h5>
+                                            <h5>Risk Ratio adalah rasio probabilitas dari suatu hasil dalam kelompok terkena probabilitas suatu hasil dalam kelompok tidak terpapar. 
+											Bersama-sama dengan perbedaan risiko dan rasio peluang , risiko relatif mengukur hubungan antara eksposur dan hasil.</h5>
+											<h5>Odds Ratio adalah ukuran asosiasi paparan (faktor risiko) dengan kejadian penyakit; dihitung dari angka kejadian penyakit 
+											pada kelompok berisiko (terpapar faktor risiko) dibanding angka kejadian penyakit pada kelompok yang tidak berisiko (tidak terpapar faktor risiko).</h5>
+											<h5>Likelihood Ratio adalah salah satu uji yang berhubungan langsungdengan penduga maksimum likelihood, di mana model distribusi dari populasinyamengikuti model distribusi dengan pdf tertentu
                                         </h5>
                                         <div class="d-flex justify-content-left">
                                             <button class="btn btn-secondary ml-2 mb-2" onclick="gettingStarted();">Getting Started</button>

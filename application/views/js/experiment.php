@@ -62,8 +62,8 @@
                     if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
                         response = JSON.parse(request.responseText);
                         if (response['status'] == 'success') {
-                            setNewData(response['datas'], response['x'], response['y']);
-                            setNewHasil(response);
+                            setNewData(response['datas'], response['heads']);
+                            setNewHasil(response['experiments'], response['heads']);
                         } else {
                             swal('GAGAL!', response['msg'], 'error');
                             document.getElementById('uploadFile').value = "";
@@ -80,13 +80,15 @@
         request.send(datanya);
     }
 
-    function setNewData(datas, x, y) {
+    function setNewData(datas, a, b, c, d) {
         document.getElementById('tableData').hidden=false;
         document.getElementById('tableHead').innerHTML=`
             <tr>
                 <th style="width:75px; text-align: center;" scope="col">No.</th>
-                <th style="text-align: center;"scope="col">` + x + `</th>
-                <th style="text-align: center;"scope="col">` + y + `</th>
+                <th style="text-align: center;"scope="col">` + a + `</th>
+                <th style="text-align: center;"scope="col">` + b + `</th>
+                <th style="text-align: center;"scope="col">` + c + `</th>
+                <th style="text-align: center;"scope="col">` + d + `</th>
             </tr>
         `;
         tableBody = document.getElementById('tableBody');
@@ -97,6 +99,7 @@
                     <th style="width:75px;" scope="row">` + (i+1) + `</th>
                     <td style="text-align: right;">` + datas[i][0] + `</td>
                     <td style="text-align: right;">` + datas[i][1] + `</td>
+                    <td style="text-align: right;">` + datas[i][2] + `</td>
                 </tr>
             `;
         }
@@ -104,16 +107,16 @@
         document.getElementById('tombolnya').hidden = true;
     }
 
-    function setNewHasil(hasils) {
+    function setNewHasil(experiments) {
         document.getElementById('tableHasil').hidden=false;
         tableBody = document.getElementById('tableBody2');
         tableBody.innerHTML = "";
 
-        setNewHasilBody(tableBody, hasils['rr'], 'Risk Rasio ()');
+        setNewHasilBody(tableBody, experiments['rr'], 'riskRatio ()');
     }
 
-    function setNewHasilBody(tableBody, hasil, s) {
-        n = +hasil.toFixed(5);
+    function setNewHasilBody(tableBody, experiment, s) {
+        n = +experiment.toFixed(5);
 
         tableBody.innerHTML += `
             <tr>
