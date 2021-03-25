@@ -69,12 +69,10 @@ class Experiments extends CI_Controller {
 					}
 
 					unlink("./assets/externals/{$object['file_name']}");
-					$a = $datas[1][1];
-					$b = $datas[1][2];
-					$c = $datas[2][1];
-					$d = $datas[2][2];
-					unset($datas[0]);
-					$datas = array_values($datas);
+					$a = $datas[1][0];
+					$b = $datas[1][1];
+					$c = $datas[1][2];
+					$d = $datas[1][3];
 
 					$experiment = new Experiment($a, $b, $c, $d);
 

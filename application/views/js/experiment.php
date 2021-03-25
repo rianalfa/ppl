@@ -63,7 +63,8 @@
                         response = JSON.parse(request.responseText);
                         if (response['status'] == 'success') {
                             setNewData(response['datas'], response['heads']);
-                            setNewHasil(response['experiments'], response['heads']);
+                            alert(response);
+                            setNewHasil(response);
                         } else {
                             swal('GAGAL!', response['msg'], 'error');
                             document.getElementById('uploadFile').value = "";
@@ -85,21 +86,22 @@
         document.getElementById('tableHead').innerHTML=`
             <tr>
                 <th style="width:75px; text-align: center;" scope="col">No.</th>
-                <th style="text-align: center;"scope="col">` + a + `</th>
-                <th style="text-align: center;"scope="col">` + b + `</th>
-                <th style="text-align: center;"scope="col">` + c + `</th>
-                <th style="text-align: center;"scope="col">` + d + `</th>
+                <th style="text-align: center;"scope="col">` + datas[0][0] + `</th>
+                <th style="text-align: center;"scope="col">` + datas[0][1] + `</th>
+                <th style="text-align: center;"scope="col">` + datas[0][2] + `</th>
+                <th style="text-align: center;"scope="col">` + datas[0][3] + `</th>
             </tr>
         `;
         tableBody = document.getElementById('tableBody');
         tableBody.innerHTML = "";
-        for (var i = 0; i < datas.length; i++) {
+        for (var i = 1; i < datas.length; i++) {
             tableBody.innerHTML += `
                 <tr>
                     <th style="width:75px;" scope="row">` + (i+1) + `</th>
-                    <td style="text-align: right;">` + datas[i][0] + `</td>
-                    <td style="text-align: right;">` + datas[i][1] + `</td>
-                    <td style="text-align: right;">` + datas[i][2] + `</td>
+                    <td style="text-align: center;">` + datas[i][0] + `</td>
+                    <td style="text-align: center;">` + datas[i][1] + `</td>
+                    <td style="text-align: center;">` + datas[i][2] + `</td>
+                    <td style="text-align: center;">` + datas[i][3] + `</td>
                 </tr>
             `;
         }
@@ -112,7 +114,9 @@
         tableBody = document.getElementById('tableBody2');
         tableBody.innerHTML = "";
 
-        setNewHasilBody(tableBody, experiments['rr'], 'riskRatio ()');
+        setNewHasilBody(tableBody, experiments['rr']['RR'], 'Risk Ratio');
+        setNewHasilBody(tableBody, experiments['or']['OR'], 'Odds ratio');
+        setNewHasilBody(tableBody, experiments['ll']['LL+'], 'Likelihood ratios');
     }
 
     function setNewHasilBody(tableBody, experiment, s) {

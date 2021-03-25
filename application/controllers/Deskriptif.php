@@ -49,39 +49,34 @@ class Deskriptif extends CI_Controller {
 			$object = $this->upload->data();
 			$namanya = "./assets/externals/{$object['file_name']}";
 			$datas = [];
-			$datass = [];
 
 			if ($filen = SimpleXLSX::parse($namanya)) {
 				$j = 0;
 				$i = 0;
 				foreach ($filen->rows() as $r => $row) {
 					foreach ($row as $c => $cell) {
-						$data[$i] = $cell;
 						if ($cell != "") {
-							$datass[$i][$j] = $cell;
+							$datas[$i][$j] = $cell;
 						}
 						$i++;
 					}
 					$i=0;
 					$j++;
-					array_push($datas, $data);
 				}
 			}
 
 			unlink("./assets/externals/{$object['file_name']}");
-			$heads = $datas[0];
-			unset($datas[0]);
-			$datas = array_values($datas);
 
-			for ($i = 0; $i < sizeof($datass); $i++) {
-				$datass[$i] = array_slice($datass[$i], 1, sizeof($datass[$i]));
+			for ($i = 0; $i < sizeof($datas); $i++) {
+				$heads[$i] = $datas[$i][0];
+				$datas[$i] = array_slice($datas[$i], 1, sizeof($datas[$i]));
 			}
-			$datass = array_values($datass);
+			$datas = array_values($datas);
 
 			$stats = [];
 
-			for ($i = 0; $i < sizeof($datass); $i++) {
-				$stat = Descriptive::describe($datass[$i]);
+			for ($i = 0; $i < sizeof($datas); $i++) {
+				$stat = Descriptive::describe($datas[$i]);
 				array_push($stats, $stat);
 			}
 
