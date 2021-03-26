@@ -4,8 +4,38 @@
         main.innerHTML = `
             <div class="card mb-2 rounded">
                 <label class="ml-3 mt-2" for="uploadFile">
-                    Silahkan unggah file data yang akan dihitung. (File berekstensi 'xlsx' atau 'xls')
+                    Silahkan unggah file data yang akan dihitung. (File berekstensi 'xlsx' atau 'xls')<br>
+                    Contoh
                 </label>
+                <tr>
+                    <left><img src="http://1.bp.blogspot.com/-kMHrDLCfizE/TpkTTKcYeiI/AAAAAAAAAKM/kFlCLiFWNEg/s1600/fisher1.PNG" width="300" height="100"/></left>
+                </tr>
+                <label>
+                    A = 3 (Ya dan Ya) <br>
+                    B = 1 (Ya dan Tidak) <br>
+                    C = 0 (Tidak dan Ya) <br>
+                    D = 3 (Tidak dan Tidak) <br><br>
+
+                    CONTOH INPUT EXCEL <br>
+                </label>
+                <table border="1" width="300" height="100">
+                <thead>
+                <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>Nilai A</td>
+                <td>Nilai B</td>
+                <td>Nilai C</td>
+                <td>Nilai D</td>
+                </tr>
+                </tbody>
+                </table>
                 <div class="d-flex justify-content-between">
                     <input type="file" class="form-control-file w-50 p-2 ml-1" id="uploadFile" name="uploadFile" value="" required/>
                     <button id="tombolnya" onclick="inputData();" class="btn btn-sm btn-secondary w-25 mr-2 mb-2" hidden>Input</button>
@@ -25,7 +55,7 @@
                         <thead id="tableHead2">
                             <tr>
                                 <th class="w-25" scope="col"></th>
-                                <th scope="col">Nilai</th>
+                                <th scope="col">Hasil</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody2">
@@ -97,7 +127,7 @@
         for (var i = 1; i < datas.length; i++) {
             tableBody.innerHTML += `
                 <tr>
-                    <th style="width:75px;" scope="row">` + (i+1) + `</th>
+                    <th style="width:75px;" scope="row">` + (i) + `</th>
                     <td style="text-align: center;">` + datas[i][0] + `</td>
                     <td style="text-align: center;">` + datas[i][1] + `</td>
                     <td style="text-align: center;">` + datas[i][2] + `</td>
@@ -115,8 +145,8 @@
         tableBody.innerHTML = "";
 
         setNewHasilBody(tableBody, experiments['rr']['RR'], 'Risk Ratio');
-        setNewHasilBody(tableBody, experiments['or']['OR'], 'Odds ratio');
-        setNewHasilBody(tableBody, experiments['ll']['LL+'], 'Likelihood ratios');
+        setNewHasilBody(tableBody, experiments['or']['OR'], 'Odds Ratio');
+        setNewHasilBody(tableBody, experiments['ll']['LL+'], 'Likelihood Ratio');
     }
 
     function setNewHasilBody(tableBody, experiment, s) {
@@ -124,7 +154,7 @@
 
         tableBody.innerHTML += `
             <tr>
-                <th class="w-25" scope="row">` + s + `</th>
+                <th class="w-50" scope="row">` + s + `</th>
                 <td>` + n + `</td>
             </tr>
         `;  
