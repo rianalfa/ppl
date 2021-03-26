@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require 'vendor/autoload.php';
+require_once 'HTTP/Request2.php';
 use MathPHP\Statistics\RandomVariable;
 
 class Random extends CI_Controller {
@@ -24,8 +26,5 @@ class Random extends CI_Controller {
 	{
 		$data['title'] = 'Peubah Acak';
 		$this->load->view('random', $data);
-
 	}
-
-	
 }

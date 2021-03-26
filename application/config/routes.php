@@ -69,7 +69,6 @@ $route['distribusi/inputData'] = 'distribusi/inputData';
 $route['kalkulator'] = 'umum/kalkulator';
 
 $route['korelasi'] = 'korelasi';
-$route['korelasi/inputData'] = 'korelasi/inputData';
 
 $route['random'] = 'random';
 
