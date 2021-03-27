@@ -3,6 +3,11 @@
         var main = document.getElementById('mainContainer');
         main.innerHTML = `
             <div class="card mb-2 rounded">
+                <div class="card mb-2" id="mulai">
+                    <h5>
+                    ANOVA ONE WAY dilakukan untuk menguji perbedaan tiga kelompok atau lebih berdasarkan satu variabel independen.
+                    </h5>
+                </div>
                 <label class="ml-3 mt-2" for="uploadFile">
                     Silahkan unggah file data yang akan dianalisa (File berekstensi 'xlsx' atau 'xls'). Lalu klik tombol "Analisa".
                 </label>

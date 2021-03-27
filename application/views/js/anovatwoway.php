@@ -3,6 +3,11 @@
         var main = document.getElementById('mainContainer');
         main.innerHTML = `
             <div class="card mb-2 rounded">
+                <div class="card mb-2" id="mulai">
+                    <h5>
+                    ANOVA TWO WAY membandingkan perbedaan rata-rata antara kelompok yang telah dibagi pada dua variabel independen (disebut faktor).
+                    </h5>
+                </div>
                 <label class="ml-3 mt-2" for="uploadFile">
                     Silahkan unggah file data yang akan dianalisa (File berekstensi 'xlsx' atau 'xls'). Lalu klik tombol "Analisa".
                 </label>

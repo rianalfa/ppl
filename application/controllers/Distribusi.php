@@ -28,8 +28,4 @@ class Distribusi extends CI_Controller
         $data['title'] = 'Distribusi Frekuensi';
         $this->load->view('distribusi', $data);
     }
-
-    public function inputData()
-    {
-    }
 }
