@@ -1,6 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 <script>
 function gettingStarted() {
     var main = document.getElementById('mainContainer');
@@ -35,8 +32,8 @@ function gettingStarted() {
     `;
 
     filenya = document.getElementById('uploadFile');
-    filenya.addEventListener('change', function(evt){
-        if (evt.value == "") {
+    filenya.addEventListener('change', function(e) {
+        if (filenya.value == "") {
             document.getElementById("tombolnya").hidden = true;
         } else {
             document.getElementById("tombolnya").hidden = false;
@@ -44,32 +41,37 @@ function gettingStarted() {
     });
 }
 
-var setData = function(heads) {
+function inputData() {
+    filenya = document.getElementById('uploadFile');
+    var file = filenya.files[0];
+    var datanya = new FormData();
 
-    this.parseExcel = function(file) {
-        var reader = new FileReader();
+    datanya.append("uploadFile", file);
+    request = new XMLHttpRequest();
+    request.open('POST', '<?= base_url('averages/inputData') ?>', true);
 
-        reader.onload = function(e) {
-            var data = e.target.result;
-            var workbook = XLSX.read(data, {
-            type: 'binary'
-            });
-            workbook.SheetNames.forEach(function(sheetName) {
-            // Here is your object
-            var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-            var json_object = JSON.stringify(XL_row_object);
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            if (request.responseText == "undefined") {
+                    swal('GAGAL!', 'Server gagal merespon.','error');
+            } else {
+                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
+                    response = JSON.parse(request.responseText);
+                    if (response['status'] == 'success') {
+                        setNewData(response['datas'], response['heads']);
+                        setNewHasil(response['averages'], response['heads']);
+                    } else {
+                        swal('GAGAL!', response['msg'],'error');
+                    }
+                } else {
+                    swal('GAGAL!', 'Gagal mengupload file.','error');
+                }
+            }
+        }
+    }
 
-            setNewData(JSON.parse(json_object), heads);
-            })
-        };
-
-        reader.onerror = function(ex) {
-            alert(ex);
-        };
-
-        reader.readAsBinaryString(file);
-    };
-};
+    request.send(datanya);
+}
 
 function setNewData(datas, heads) {
     document.getElementById('tableData').hidden = false;
@@ -91,14 +93,10 @@ function setNewData(datas, heads) {
 
         tr.appendChild(th);
 
-        for (var j = 0; j < heads.length; j++) {
+        for (var j = 0; j < datas[i].length; j++) {
             td = document.createElement('td');
             td.setAttribute('style', 'width: 150px; text-align: right;');
-            if (datas[i].hasOwnProperty(heads[j])) {
-                td.appendChild(document.createTextNode(datas[i][heads[j]]));
-            } else {
-                td.appendChild(document.createTextNode(""));
-            }
+            td.appendChild(document.createTextNode(datas[i][j]));
 
             tr.appendChild(td);
         }
@@ -110,41 +108,7 @@ function setNewData(datas, heads) {
     document.getElementById('tombolnya').hidden = true;
 }
 
-function inputData() {
-    filenya = document.getElementById('uploadFile');
-    var file = filenya.files[0];
-    var datanya = new FormData();
-
-    datanya.append("uploadFile", file);
-    request = new XMLHttpRequest();
-    request.open('POST', '<?= base_url('deskriptif/inputData') ?>', true);
-
-    request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-            if (request.responseText == "undefined") {
-                    swal('GAGAL!', 'Server gagal merespon.','error');
-            } else {
-                if (request.getResponseHeader('Content-type').indexOf('json') > 0) {
-                    response = JSON.parse(request.responseText);
-                    if (response['status'] == 'success') {
-                        var readExcel = new setData(response['heads']);
-                        readExcel.parseExcel(file);
-                        
-                        setNewHasil(response['stats'], response['heads']);
-                    } else {
-                        swal('GAGAL!', response['msg'],'error');
-                    }
-                } else {
-                    swal('GAGAL!', 'Gagal mengupload file.','error');
-                }
-            }
-        }
-    }
-
-    request.send(datanya);
-}
-
-function setNewHasil(stats, heads) {
+function setNewHasil(averages, heads) {
     tableHasil = document.getElementById('tableHasil').hidden = false;
     tableHead = document.getElementById('tableHead2');
     tableHead.innerHTML = "";
@@ -153,22 +117,26 @@ function setNewHasil(stats, heads) {
 
     tableBody = document.getElementById('tableBody2');
     tableBody.innerHTML = "";
-
-    setNewHasilBody(stats, tableBody, heads.length, 'Min.', 'min', '');
-
-    setNewHasilBody(stats, tableBody, heads.length, 'Q1', 'quartiles', 'Q1');
     
-    setNewHasilBody(stats, tableBody, heads.length, 'Mean', 'mean', '');
+    setNewHasilBody(averages, tableBody, heads.length, 'Mean', 'mean', '');
 
-    setNewHasilBody(stats, tableBody, heads.length, 'Median', 'median', '');
-    
-    setNewHasilBody(stats, tableBody, heads.length, 'Q3', 'quartiles', 'Q3');
-
-    setNewHasilBody(stats, tableBody, heads.length, 'Maks.', 'max', '');
-    
-    setNewHasilBody(stats, tableBody, heads.length, 'Varians', 'variance', '');
-
-    setNewHasilBody(stats, tableBody, heads.length, 'Standar\nDeviasi', 'sd', '');
+    setNewHasilBody(averages, tableBody, heads.length, 'Median', 'median', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Mode', 'mode', '0');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Rata-Rata Geometrik', 'geometric_mean', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Rata-Rata Harmonik', 'harmonic_mean', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Rata-Rata Kontraharmonik', 'contraharmonic_mean', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Rata-Rata Kuadrat', 'quadratic_mean', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Trimean', 'trimean', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Inter Quartile Mean', 'iqm', '');
+	
+	setNewHasilBody(averages, tableBody, heads.length, 'Cubic Mean', 'cubic_mean', '');
 }
 
 function setNewHead(heads, tableHead, s) {
@@ -193,7 +161,7 @@ function setNewHead(heads, tableHead, s) {
     tableHead.appendChild(tr);
 }
 
-function setNewHasilBody(stats, tableBody, heads, s, t, u) {
+function setNewHasilBody(averages, tableBody, heads, s, t, u) {
     tr = document.createElement('tr');
     th = document.createElement('th');
     th.setAttribute('style', 'width: 50px;');
@@ -205,9 +173,9 @@ function setNewHasilBody(stats, tableBody, heads, s, t, u) {
         td.setAttribute('style', 'width: 150px; text-align: right;');
 
         if (u == ""){
-            n = +stats[i][t].toFixed(5);
+            n = +averages[i][t].toFixed(5);
         } else {
-            n = +stats[i][t][u].toFixed(5);
+            n = +averages[i][t][u].toFixed(5);
         }
 
         td.appendChild(document.createTextNode(n));

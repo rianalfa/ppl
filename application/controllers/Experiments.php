@@ -2,9 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once 'HTTP/Request2.php';
-use MathPHP\Statistics\Regression;
+use MathPHP\Statistics\Experiment;
 
-class Regresi extends CI_Controller {
+class Experiments extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -24,8 +24,8 @@ class Regresi extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Regresi';
-		$this->load->view('regresi', $data);
+		$data['title'] = "Experiment";
+		$this->load->view('experiment', $data);
 	}
 
 	public function inputData()
@@ -57,7 +57,7 @@ class Regresi extends CI_Controller {
 						$j = 0;
 						$i = 0;
 						foreach ($filen->rows() as $r => $row) {
-							foreach ($row as $c => $cell) {
+							foreach ($row as $s => $cell) {
 								$data[$i] = $cell;
 								$i++;
 							}
@@ -69,24 +69,23 @@ class Regresi extends CI_Controller {
 					}
 
 					unlink("./assets/externals/{$object['file_name']}");
-					$heads[0] = $datas[0][0];
-					$heads[1] = $datas[0][1];
-					unset($datas[0]);
-					$datas = array_values($datas);
+					$a = $datas[1][0];
+					$b = $datas[1][1];
+					$c = $datas[1][2];
+					$d = $datas[1][3];
 
-					$regression = new Regression\Linear($datas);
+					$experiment = new Experiment($a, $b, $c, $d);
 
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(
 						'status' => 'success',
-						'heads' => $heads,
-						'm' => $regression->getParameters()['m'],
-						'mse' => $regression->standardErrors()['m'],
-						'mt' => $regression->tValues()['m'],
-						'mp' => $regression->tProbability()['m'],
-						'r2' => $regression->r2(),
-						'fs' => $regression->fStatistic(),
-						'fp' => $regression->fProbability(),
-						'hasil' => $regression->getEquation()
+						'a' => $a,
+						'b' => $b,
+						'c' => $c,
+						'd' => $d,
+						'datas' => $datas,
+						'rr' => $experiment->riskRatio($a, $b, $c, $d),
+						'or' => $experiment->oddsRatio($a, $b, $c, $d),
+						'll' => $experiment->likelihoodRatio($a, $b, $c, $d)
 					)));
 				} else {
 					$this->output->set_content_type('application/json')->set_output(json_encode(array(

@@ -25,16 +25,17 @@
                                 <div class="col-lg-12 px-2">
                                     <div class="submenu-box">
                                         <ul class="list-group list-unstyled m-0">
-                                            <li><a href="">ANOVA</a></li>
-                                            <li><a href="">Averages</a></li>
+                                            <li><a href="<?= base_url("anova") ?>">ANOVA</a></li>
+                                            <li><a href="<?= base_url("averages") ?>">Averages</a></li>
                                             <li><a href="<?= base_url("circulars") ?>">Circular</a></li>
                                             <li><a href="<?= base_url("deskriptif") ?>">Deskriptif</a></li>
                                             <li><a href="">Distance</a></li>
                                             <li><a href="<?= base_url("distribusi") ?>">Distribusi Frekuensi</a></li>
-                                            <li><a href="">Percobaan</a></li>
-                                            <li><a href="">Korelasi</a></li>
+                                            <li><a href="<?= base_url("experiments") ?>">Experiment</a></li>
+                                            <li><a href="<?= base_url("korelasi") ?>">Korelasi</a></li>
                                             <li><a href="<?= base_url("outliers") ?>">Outlier</a></li>
-                                            <li><a href="">Variabel Acak</a></li>
+                                            <li><a href="<?= base_url("experiments") ?>">Percobaan</a></li>
+                                            <li><a href="<?= base_url("random") ?>">Peubah Acak</a></li>
                                             <li><a href="<?= base_url("regresi") ?>">Regresi Linier</a></li>
                                             <li><a href="">Uji Signifikansi</a></li>
                                         </ul>

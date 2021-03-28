@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require 'vendor/autoload.php';
 require_once 'HTTP/Request2.php';
-use MathPHP\Statistics\Outlier;
+use MathPHP\Statistics\Correlation;
 
-class Outliers extends CI_Controller {
+class Korelasi extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,8 +25,7 @@ class Outliers extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Outlier';
-		$this->load->view('outlier',$data);
+		$data['title'] = 'Korelasi';
+		$this->load->view('korelasi',$data);
 	}
-
 }

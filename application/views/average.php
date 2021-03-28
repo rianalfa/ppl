@@ -25,20 +25,17 @@
                             <div class="col-md-12 mt-lg-4 mt-4">
                                 <!-- Page Heading -->
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 class="h3 mb-0 text-gray-800">Tentang</h1>
+                                    <h1 class="h3 mb-0 text-gray-800">Average</h1>
                                 </div>
                                 <div class="col-md-12 mt-4" id="mainContainer">
                                     <div class="card">
                                         <h5>
-                                            Kalkulator Statistik Portabel merupakan aplikasi berbasis web yang berfungsi untuk menghitung angka secara umum dan menyediakan
-											alat perhitungan fungsi-fungsi statistik terhadap suatu data.
-											
+                                            Average atau rata-rata adalah sebuah angka yang mewakili sekumpulan data yang 
+											akan digunakan untuk perhitungan statistik.
                                         </h5>
-                                        <h5>
-                                            Kalkulator untuk menghitung angka sendiri terdapat 3 mode yaitu kalkulator standar, science, dan programmer yang digunakan sesuai 
-											kebutuhan. Kemudian terdapat berbagai macam alat perhitungan statistik seperti, regresi linier, korelasi, statistik deskriptif,
-											uji signifikansi, ANOVA, dll.
-                                        </h5>
+                                        <div class="d-flex justify-content-left">
+                                            <button class="btn btn-secondary ml-2 mb-2" onclick="gettingStarted();">Getting Started</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +61,8 @@
 
         });
     </script>
+    
+    <?php $this->load->view('js/average.php'); ?>
 </body>
 
 </html>

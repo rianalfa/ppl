@@ -2,9 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once 'HTTP/Request2.php';
-use MathPHP\Statistics\Descriptive;
+use MathPHP\Statistics\Average;
 
-class Deskriptif extends CI_Controller {
+class Averages extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -24,14 +24,14 @@ class Deskriptif extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = "Deskriptif";
-		$this->load->view('deskriptif', $data);
+		$data['title'] = "Average";
+		$this->load->view('average', $data);
 	}
 
 	public function inputData()
 	{
 		$config['upload_path'] = './assets/externals';
-		$config['allowed_types'] = 'xlsx|xls';
+		$config['allowed_types'] = '*';
 		$config['max_filename'] = '255';
         $config['encrypt_name'] = false;
         $config['max_size'] = '5120';
@@ -49,41 +49,48 @@ class Deskriptif extends CI_Controller {
 			$object = $this->upload->data();
 			$namanya = "./assets/externals/{$object['file_name']}";
 			$datas = [];
+			$datass = [];
 
 			if ($filen = SimpleXLSX::parse($namanya)) {
 				$j = 0;
 				$i = 0;
 				foreach ($filen->rows() as $r => $row) {
 					foreach ($row as $c => $cell) {
+						$data[$i] = $cell;
 						if ($cell != "") {
-							$datas[$i][$j] = $cell;
+							$datass[$i][$j] = $cell;
 						}
 						$i++;
 					}
 					$i=0;
 					$j++;
+					array_push($datas, $data);
 				}
 			}
 
 			unlink("./assets/externals/{$object['file_name']}");
-
-			for ($i = 0; $i < sizeof($datas); $i++) {
-				$heads[$i] = $datas[$i][0];
-				$datas[$i] = array_slice($datas[$i], 1, sizeof($datas[$i]));
-			}
+			$heads = $datas[0];
+			unset($datas[0]);
 			$datas = array_values($datas);
 
-			$stats = [];
+			for ($i = 0; $i < sizeof($datass); $i++) {
+				$datass[$i] = array_slice($datass[$i], 1, sizeof($datass[$i]));
+			}
+			$datass = array_values($datass);
 
-			for ($i = 0; $i < sizeof($datas); $i++) {
-				$stat = Descriptive::describe($datas[$i]);
-				array_push($stats, $stat);
+			$averages = [];
+
+			for ($i = 0; $i < sizeof($datass); $i++) {
+				$average = Average::describe($datass[$i]);
+				array_push($averages, $average);
 			}
 
 			$this->output->set_content_type('application/json')->set_output(json_encode(array(
 				'status' => 'success',
 				'heads' => $heads,
-				'stats' => $stats
+				'datas' => $datas,
+				'datass' => $datass,
+				'averages' => $averages
 			)));
 		}
 	}
