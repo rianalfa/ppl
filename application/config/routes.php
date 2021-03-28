@@ -56,7 +56,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['kalkulator'] = 'umum/kalkulator';
 $route['deskriptif'] = 'deskriptif';
+$route['distances'] = 'distances';
+$route['distances/inputData'] = 'distances/inputData';
 $route['regresi'] = 'regresi';
 $route['regresi/inputData'] = 'regresi/inputData';
+$route['significancetesting'] = 'significancetesting';
 $route['distribusi'] = 'distribusi';
 $route['distribusi/inputData'] = 'distribusi/inputData';
