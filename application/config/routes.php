@@ -61,13 +61,12 @@ $route['averages'] = 'averages';
 $route['deskriptif'] = 'deskriptif';
 $route['deskriptif/inputData'] = 'deskriptif/inputData';
 
-$route['distances'] = 'distances';
-$route['distances/inputData'] = 'distances/inputData';
-
 $route['experiments'] = 'experiments';
 
 $route['distribusi'] = 'distribusi';
 $route['distribusi/inputData'] = 'distribusi/inputData';
+
+$route['jarak'] = 'jarak';
 
 $route['kalkulator'] = 'umum/kalkulator';
 

@@ -29,7 +29,7 @@
                                             <li><a href="<?= base_url("averages") ?>">Averages</a></li>
                                             <li><a href="<?= base_url("circulars") ?>">Circular</a></li>
                                             <li><a href="<?= base_url("deskriptif") ?>">Deskriptif</a></li>
-                                            <li><a href="">Distance</a></li>
+                                            <li><a href="<?= base_url("jarak") ?>">Distance</a></li>
                                             <li><a href="<?= base_url("distribusi") ?>">Distribusi Frekuensi</a></li>
                                             <li><a href="<?= base_url("experiments") ?>">Experiment</a></li>
                                             <li><a href="<?= base_url("korelasi") ?>">Korelasi</a></li>
@@ -37,7 +37,7 @@
                                             <li><a href="<?= base_url("experiments") ?>">Percobaan</a></li>
                                             <li><a href="<?= base_url("random") ?>">Peubah Acak</a></li>
                                             <li><a href="<?= base_url("regresi") ?>">Regresi Linier</a></li>
-                                            <li><a href="">Uji Signifikansi</a></li>
+                                            <li><a href="<?= base_url("ujisignifikansi") ?>">Uji Signifikansi</a></li>
                                         </ul>
                                     </div>
                                 </div>
