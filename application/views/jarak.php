@@ -30,7 +30,7 @@
 									<div class="card mb-2" id="mulai">
                                     	<h5>
                                         <ul style="list-style-type: disc;" class="col-md-12">
-												<p>Berikut adalah yang dihitung :</p>
+												<p>Pengukuran jarak dibawah ini digunakan untuk mengukur kesamaan antara dua probability distributions</p>
                                                 <li>Bhattacharyya Distance</li>
                                                 <li>Hellinger Distance</li>
                                                 <li>Minkowski Distance</li>
@@ -54,6 +54,12 @@
 									$D⟮X、Y⟯=0;
 									$d⟮X、Y⟯=0;
 									$d₁⟮X、Y⟯=0;
+									$JSD⟮X‖Y⟯=0;
+									$c⟮X、Y⟯ = 0;
+									$brayCurtis=0;
+									$cosine=0;
+									$cos⟮α⟯=0;
+
                     				$name="";
                     				$name2 ="";
 								
@@ -77,6 +83,11 @@
 										$D⟮X、Y⟯    = Distance::minkowski($X, $Y, $p = 2);
 										$d⟮X、Y⟯    = Distance::euclidean($X, $Y);               // L² distance
 										$d₁⟮X、Y⟯   = Distance::manhattan($X, $Y);
+										$JSD⟮X‖Y⟯   = Distance::jensenShannon($X, $Y);
+										$c⟮X、Y⟯    = Distance::canberra($X, $Y);
+										$brayCurtis = Distance::brayCurtis($X, $Y);
+										$cosine    = Distance::cosine($X, $Y);
+										$cos⟮α⟯     = Distance::cosineSimilarity($X, $Y);
 					  				}
 
 									function test_input($data) {
@@ -88,7 +99,7 @@
 									?>
 									<div class="card rounded" id="inputData" >
 										<div class="col-md-12 mt-4">
-											<label>Silahkan masukkan data variabel X dan Y yang akan dihitung. Masukkan data dengan pemisah tanda koma (,), contoh: 1,3,5,2.</label>
+											<label>Silahkan masukkan data variabel X dan Y <strong>(probability distributions)</strong> yang akan dihitung. Masukkan data dengan pemisah tanda koma (,), contoh: 0.2, 0.5, 0.3.</label>
 											<form method="post" action="">  
 												<div class="mb-3">
 													<label for="inputX">Variabel X</label>
@@ -110,30 +121,50 @@
 										<table class="table table-light mt-2 rounded">
                         					<thead>
                             					<tr>
-	                    			    	        <th style="text-align: center;" scope="col"></th>
-    	                            				<th style="text-align: center;" scope="col">Nilai</th>
+	                    			    	        <th style="text-align: left;" scope="col">Distances</th>
+    	                            				<th style="text-align: left;" scope="col">Nilai</th>
 	 				       	                    </tr>
     	        				            </thead>
         	        	        			<tbody>
          					           	        <tr>
                 	        				        <th scope="row">Bhattacharyya Distance</th>
-													<td style="text-align: right;"><?php echo $DB⟮X、Y⟯?></td>
+													<td style="text-align: left;"><?php echo ": $DB⟮X、Y⟯";?></td>
  				        	                   </tr>
 												<tr>
                                 					<th scope="row">Hellinger Distance</th>
-													<td style="text-align: right;"><?php echo $H⟮X、Y⟯?></td>
+													<td style="text-align: left;"><?php echo ": $H⟮X、Y⟯";?></td>
                             					</tr>
 												<tr>
 	                				                <th scope="row">Minkowski Distance</th>
-													<td style="text-align: right;"><?php echo $D⟮X、Y⟯?></td>
+													<td style="text-align: left;"><?php echo ": $D⟮X、Y⟯";?></td>
 					                            </tr>
 												<tr>
                 	                				<th scope="row">Euclidean Distance</th>
-													<td style="text-align: right;"><?php echo $d⟮X、Y⟯?></td>
+													<td style="text-align: left;"><?php echo ": $d⟮X、Y⟯";?></td>
                 					            </tr>
 												<tr>
 				                	                <th scope="row">Manhattan Distance</th>
-													<td style="text-align: right;"><?php echo $d₁⟮X、Y⟯?></td>
+													<td style="text-align: left;"><?php echo ": $d₁⟮X、Y⟯";?></td>
+				                        	    </tr>
+												<tr>
+				                	                <th scope="row">Jensen Shannon Distance</th>
+													<td style="text-align: left;"><?php echo ": $JSD⟮X‖Y⟯";?></td>
+				                        	    </tr>
+												<tr>
+				                	                <th scope="row">Canberra Distance</th>
+													<td style="text-align: left;"><?php echo ": $c⟮X、Y⟯";?></td>
+				                        	    </tr>
+												<tr>
+				                	                <th scope="row">Bray Curtis Distance</th>
+													<td style="text-align: left;"><?php echo ": $brayCurtis";?></td>
+				                        	    </tr>
+												<tr>
+				                	                <th scope="row">Cosine Distance</th>
+													<td style="text-align: left;"><?php echo ": $cosine";?></td>
+				                        	    </tr>
+												<tr>
+				                	                <th scope="row">Cosine Similarity Distance</th>
+													<td style="text-align: left;"><?php echo ": $cos⟮α⟯";?></td>
 				                        	    </tr>
 	                				        </tbody>
    					                 	</table>

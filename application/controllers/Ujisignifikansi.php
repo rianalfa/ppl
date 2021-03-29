@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once 'HTTP/Request2.php';
-//use MathPHP\Statistics\Regression;
 use MathPHP\Statistics\Significance;
 
 class Ujisignifikansi extends CI_Controller {
