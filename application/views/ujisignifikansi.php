@@ -69,14 +69,14 @@
 										$X = explode(',',$name);
                     					$Y = explode(',',$name2);
 					
-                    					$t = Significance::tTest($X, $Y)[t];
-                                        $df = Significance::tTest($X, $Y)[df];
-                                        $p1 = Significance::tTest($X, $Y)[p1];
-                                        $p2 = Significance::tTest($X, $Y)[p2];
-                                        $mean1 = Significance::tTest($X, $Y)[mean1];
-                                        $mean2 = Significance::tTest($X, $Y)[mean2];
-                                        $sd1 = Significance::tTest($X, $Y)[sd1];
-                                        $sd2 = Significance::tTest($X, $Y)[sd2];
+                    					$t = Significance::tTest($X, $Y)['t'];
+                                        $df = Significance::tTest($X, $Y)['df'];
+                                        $p1 = Significance::tTest($X, $Y)['p1'];
+                                        $p2 = Significance::tTest($X, $Y)['p2'];
+                                        $mean1 = Significance::tTest($X, $Y)['mean1'];
+                                        $mean2 = Significance::tTest($X, $Y)['mean2'];
+                                        $sd1 = Significance::tTest($X, $Y)['sd1'];
+                                        $sd2 = Significance::tTest($X, $Y)['sd2'];
 					  				}
 
 									function test_input($data) {
